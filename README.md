@@ -22,11 +22,12 @@ the Solution Explorer panel. If you see yellow warning triangles, re-enter/add
 the references by right-clicking "References" and selecting them in the 
 DXLog.net binary folder, typically C:\Program Files (x86)\DXLog.net.
 
-For convenience, it is also suggested you pin this project to Visual Studio's 
-startup panel.
+Since you may want to modify the scripts over time (setting output power etc.), it is also
+suggested you pin this project to Visual Studio's startup panel.
 
 To install the scripts in DXLog, enter the scripts manager (Tools->Scripts manager)
-Add the scripts one by one, give them a good name and assign a key those that need it:
+Add the scripts one by one, give them a good name and assign a key those that need it.
+
 
 | Script              | Suggested Name | Suggested Key                            |
 |---------------------|----------------|------------------------------------------|
