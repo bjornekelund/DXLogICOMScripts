@@ -26,16 +26,16 @@ startup panel.
 To install the scripts in DXLog, enter the scripts manager (Tools->Scripts manager)
 Add the scripts one by one, give them a good name and assign a key those that need it:
 
-Script                Suggested Name    Suggested Key
---------------------------------------------------------------------------------
-ICOM_Bandpower        ICOMBANDPOWER     -
-ICOM_RIT_Clear        ICOMRITCLEAR      Shift-Left or Shift-Delete
-ICOM_RIT_Minus        ICOMRITMINUS      Shift-Up 
-ICOM_RIT_Plus         ICOMRITPLUS       Shift-Down
-ICOM_SO2V             ICOMSO2V          `on english keyboard, § on Scandinavian
-ICOM_Speedsynch       ICOMSPEED         -
-ICOM_Waterfall_Mode   ICOMWFMODE        Alt-U
-ICOM_Waterfall_Zoom   ICOMWFZOOM        Alt-Z
+| Script| Suggested Name | Suggested Key |
+|-------|----------------|------------|
+| ICOM_Bandpower | ICOMBANDPOWER | - |
+| ICOM_RIT_Clear | ICOMRITCLEAR | Shift-Left or Shift-Delete | 
+| ICOM_RIT_Minus | ICOMRITMINUS | Shift-Up | 
+| ICOM_RIT_Plus | ICOMRITPLUS | Shift-Down | 
+| ICOM_SO2V | ICOMSO2V | ` on english keyboard, § on Scandinavian | 
+| ICOM_Speedsynch | ICOMSPEED | - | 
+| ICOM_Waterfall_Mode | ICOMWFMODE | Alt-U | 
+| ICOM_Waterfall_Zoom | ICOMWFZOOM | Alt-Z | 
 
 The following Alt keys are unassigned by default: H, Q, U, X, and Z.
 The following Ctrl keys are unassigned by default: C, H, I, J, K, M, N, O, P, 
