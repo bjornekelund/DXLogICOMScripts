@@ -39,8 +39,9 @@ Add the scripts one by one, give them a good name and assign a key those that ne
 | ICOM_Waterfall_Mode | ICOMWFMODE     | Alt-U                                    | 
 | ICOM_Waterfall_Zoom | ICOMWFZOOM     | Alt-Z                                    | 
 
-The following Alt keys are unassigned by default: H, Q, U, X, and Z.
-The following Ctrl keys are unassigned by default: C, H, I, J, K, M, N, O, P, 
+The following **Alt keys** are unassigned by default: H, Q, U, X, and Z.
+
+The following **Ctrl keys** are unassigned by default: C, H, I, J, K, M, N, O, P, 
 Q, R, U, V, X, and Y.
 
 The choice of up vs down is individual. The one shown above is consistent with 
