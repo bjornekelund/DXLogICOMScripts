@@ -1,6 +1,4 @@
-﻿README 2019-01-31 Björn Ekelund SM7IUN sm7iun@ssa.se
-----------------------------------------------------------------------
-Place content of the compressed archive where you keep DXLog scripts.
+﻿DXLog.net script kit for IC-7610 and possibly others in the 7000 family
 
 NB. These scripts are provide as is without any warranties or other commitments.
 They are used at your own risk. The scripts manipulate things like output power 
