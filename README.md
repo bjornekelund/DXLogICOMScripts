@@ -45,8 +45,8 @@ The following **Alt keys** are unassigned by default: H, Q, U, X, and Z.
 The following **Ctrl keys** are unassigned by default: C, H, I, J, K, M, N, O, P, 
 Q, R, U, V, X, and Y.
 
-The choice of up vs down is individual. The one shown above is consistent with 
-movement in the bandmap where the frequency increases downwards. 
+The choice of **Shift-Up** vs. **Shift-down** is individual. The one shown above is consistent 
+with movement in the bandmap where the frequency increases downwards. 
 
 An very valuable feature in DXLog.net is the possibility to invoke scripts 
 from key macros. The syntax is $!SCRIPTNAME where SCRIPTNAME is the name that 
