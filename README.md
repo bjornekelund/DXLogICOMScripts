@@ -49,13 +49,13 @@ The choice of **Shift-Up** vs. **Shift-down** is individual. The one shown above
 with movement in the bandmap where the frequency increases downwards. 
 
 An very valuable feature in DXLog.net is the possibility to invoke scripts 
-from key macros. The syntax is $!SCRIPTNAME where SCRIPTNAME is the name that 
+from key macros. The syntax is *$!SCRIPTNAME* where *SCRIPTNAME* is the name that 
 you assign to the script in the Tools->Scripts Manager menu. 
 It is highly recommended to use this to reset the RIT in the F1/CQ macro. 
-Simply add $!ICOMRITCLEAR at the end of the F1 macro definition. 
+Simply add *$!ICOMRITCLEAR* to the end of the F1 macro definition. 
 Additionally, some prefer to do this also in the run F3/TU-Log macro. 
 
-The scripts do the following:
+## Scripts description
 
 **ICOM_Bandpower** Per band output power control to avoid overdriving a PA. 
 Typically not used for low power/barefoot operation. Edit the power level table 
