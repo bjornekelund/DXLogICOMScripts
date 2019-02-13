@@ -1,9 +1,8 @@
 ﻿# DXLog.net script kit for IC-7610 
 
-NB. These scripts are provide as is without any warranties or other commitments.
-They are used at your own risk. The scripts manipulate things like output power 
-which means they can cause hardware damage if malfunctioning,  wrongly set up, 
-or wrongly used.
+These scripts are used entirely at your own risk. Since the scripts control hardware, 
+including things like transmitter output power they can cause 
+hardware damage due to latent software defects or if wrongly configured or used.
 
 The script kit is written for and verified on IC-7610 but will likely work for all 
 waterfall capable ICOM radios in the 7000 family.
@@ -11,11 +10,13 @@ Minor modifications of the scripts (e.g. changing power levels or band edges) ca
 done using any source code editor (*notepad++* is a good choice.)
 
 Any more sophisticated modification and/or extension of the scripts will greatly 
-benefit from using Visual Studio.
-Since the debugging facilities in DXLog are limited, a more advanced SDK like 
-Visual Studio is a great help.
-The script kit is formatted for use in Visual Studio. Once installed, just 
-double-click on the file *DXLogICOMScripts.sln*.
+benefit from using Visual Studio. The community version is free of charge for 
+individuals and open-source contributors. visualstudio.microsoft.com/downloads
+
+Since the debugging facilities within *DXLog.net* are very limited, a more 
+advanced SDK like Visual Studio is a great help.
+The script kit is formatted for use in Visual Studio. Once cloned or 
+downloaded/decompressed, just double-click on the file *DXLogICOMScripts.sln*.
 
 If the editor complains about syntax/usage (red wavy lines) make sure you have 
 references to the DXLog DLL and EXE files correctly set up. You can add this in 
