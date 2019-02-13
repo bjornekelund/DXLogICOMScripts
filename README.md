@@ -8,22 +8,23 @@ or wrongly used.
 The script kit is written for and verified on IC-7610 but will likely work for all 
 waterfall capable ICOM radios in the 7000 family.
 Minor modifications of the scripts (e.g. changing power levels or band edges) can be 
-done using any source code editor (notepad++ is a good choice.)
+done using any source code editor (*notepad++* is a good choice.)
 
 Any more sophisticated modification and/or extension of the scripts will greatly 
 benefit from using Visual Studio.
 Since the debugging facilities in DXLog are limited, a more advanced SDK like 
 Visual Studio is a great help.
 The script kit is formatted for use in Visual Studio. Once installed, just 
-double-click on the file DXLogICOMScripts.sln.
+double-click on the file *DXLogICOMScripts.sln*.
+
 If the editor complains about syntax/usage (red wavy lines) make sure you have 
 references to the DXLog DLL and EXE files correctly set up. You can add this in 
-the Solution Explorer panel. If you see yellow warning triangles, re-enter/add 
+the *Solution Explorer* panel. If you see yellow warning triangles, re-enter/add 
 the references by right-clicking "References" and selecting them in the 
 DXLog.net binary folder, typically C:\Program Files (x86)\DXLog.net.
 
-Since you may want to modify the scripts over time (setting output power etc.), it is also
-suggested you pin this project to Visual Studio's startup panel.
+Since you may want to modify the scripts over time (setting output power etc.), 
+it is also a good idea to pin this project to Visual Studio's startup panel.
 
 To install the scripts in DXLog, enter the scripts manager (Tools->Scripts manager)
 Add the scripts one by one, give them a good name and assign a key those that need it.
@@ -40,13 +41,17 @@ Add the scripts one by one, give them a good name and assign a key those that ne
 | ICOM_Waterfall_Mode | ICOMWFMODE     | Alt-U                                    | 
 | ICOM_Waterfall_Zoom | ICOMWFZOOM     | Alt-Z                                    | 
 
-The following **Alt keys** are unassigned by default: H, Q, U, X, and Z.
+The following **Alt keys** are unassigned by default in *DXLog.net*: H, Q, U, X, and Z.
 
-The following **Ctrl keys** are unassigned by default: C, H, I, J, K, M, N, O, P, 
+The following **Ctrl keys** are unassigned by default in *DXLog.net*: C, H, I, J, K, M, N, O, P, 
 Q, R, U, V, X, and Y.
 
-The choice of **Shift-Up** vs. **Shift-down** is individual. The one shown above is consistent 
-with movement in the bandmap where the frequency increases downwards. 
+The choice of **Shift-Up** vs. **Shift-down** is based on personal preferences. 
+Some prefer them to correspond to the up/down movement in the band map, others 
+prefer them to correspond to up/down in pitch. 
+Remember that pitch depends on whether you use USB or LSB for CW. 
+The proposed keys above is consistent with movement in the bandmap, where the 
+frequency increases downwards. 
 
 An very valuable feature in DXLog.net is the possibility to invoke scripts 
 from key macros. The syntax is *$!SCRIPTNAME* where *SCRIPTNAME* is the name that 
