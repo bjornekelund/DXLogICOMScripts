@@ -1,7 +1,7 @@
 ﻿# DXLog.net script kit for IC-7610 
 
 These scripts are used entirely at your own risk. Since the scripts control hardware, 
-including things like transmitter output power they can cause 
+including things like transmitter output power, they can cause 
 hardware damage due to latent software defects or if wrongly configured or used.
 
 The script kit is written for and verified on IC-7610 but will likely work for all 
