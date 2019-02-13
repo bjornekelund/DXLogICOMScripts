@@ -77,7 +77,7 @@ with ICOM IC-7610. It has not been tested but believed to be working also for IC
 main VFO ("radio 1" in SO2V) will result in the main receiver in both ears. 
 Selecting the sub VFO ("radio 2") will result in the main receiver in the left ear 
 and the sub receiver in the right ear. In "stereo" mode (toggled with Ctrl-Alt-S 
-or AltGR-S) the main receiver will always be in the left ear and the sub receiver 
+or AltGr-S) the main receiver will always be in the left ear and the sub receiver 
 in the right ear, independent of focus. Since it is not possible to listen to only 
 the sub receiver, it is recommended to Run on the main VFO and S&P on the sub VFO. 
 To help with weak stations answering on Run, or to check a station you are waiting 
@@ -85,20 +85,30 @@ to work on radio 2, you can temporarily toggle between stereo and only main rece
 using the key mapped to the script. To manage weak or hard to copy stations on S&P, 
 press the main receiver's AF gain knob to temporarily mute it. 
 
-**ICOM_Speedsynch** Synchronizes the radio's internal keyer with DXLog. Acts silently in 
-the background, needs no key mapping.
+**ICOM_Speedsynch** Synchronizes the radio's internal keyer with *DXLog.net's* speed setting.
+Acts silently in the background, needs no key mapping. Works also for SO2R. Since radio 1 and 
+radio 2 are the same physical radio in SO2V, and the script event is only raised at speed 
+changes, it must unfortunately ignore the speed of radio 2 in SO2V. 
+Should this be an actual problem, you can redesign **ICOM_SO2V** to also update the 
+radio's keyer speed setting at focus changes. Each logical radio's current speed is 
+available in the object *mainForm._cwKeyer.CWSpeed(int radioNumber)*
 
 **ICOM_Waterfall_Mode** Automatically sets the edges and reference level of the 
-radio's built-in panadapter based on frequency band and operating mode. 
+radio's waterfall/spectrum display based on frequency band and operating mode. 
 Should be assigned to a key for quick restore after manual adjustments or zoom.
+Only operates on VFO A but supports all operating modes; SO1R, SO2R and SO2V.
+Only active for ICOM radios but does not actually poll the radio to determine 
+if it is waterfall capable. For e.g. SO2R operation with two ICOM radios where 
+only one is waterfall capable, modify the object *WaterfallCapable[]* accordingly.
 
 **ICOM_Waterfall_Zoom** Script to quickly zoom the radio's built in panadapter to a 
-narrow segment of the band (default is 20kHz) centered around the current frequency.
+narrow segment of the band (default is 20kHz, but easily modified in the script code) 
+centered around the current frequency.
 
-**ICOM_Experiment** A script solely for development purposes. Should not be installed. 
+**ICOM_Experiment** A script solely for development purposes. No need to install. 
 
-Please note that due to the design of DXLog's rig communication queueing mechanics, 
-performance may not be completely reliable at 19200bps with frequent polling (<300ms). 
+Please note that due to the design of *DXLog.net's* CAT queueing mechanics, 
+performance may not be completely reliable at 19200bps with frequent polling (< 300ms). 
 For the most reliable and responsive operation, the communication via the USB interface 
 at 115200bps is recommended.
 
