@@ -67,8 +67,9 @@ Typically not used for low power/barefoot operation. Edit the power level table
 to set safe levels for each band and adjust level manually if required. 
 Only ivoked at band changes. 
 
-**ICOM_RIT_xxx** Three scripts for RIT (during Run) and frequency (during S&P) adjustment 
-using shifted arrow keys. 
+**ICOM_RIT_Plus** **ICOM_RIT_Minus** **ICOM_RIT_Clear** Three scripts for 
+RIT (during Run) and frequency (during S&P) adjustment 
+using shifted arrow keys. Plus and minus refers to actual frequency change. 
 
 **ICOM_SO2V** Automatic switching of VFO knob focus and audio paths for SO2V operation 
 with ICOM IC-7610. It has not been tested but believed to be working also for IC-7800, 
