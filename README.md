@@ -12,8 +12,8 @@ Minor modifications of the scripts (e.g. changing power levels or band edges) ca
 done using any source code editor (*notepad++* is a good choice.)
 
 Any more sophisticated modification and/or extension of the scripts will greatly 
-benefit from using Visual Studio. The community version is free of charge for 
-individuals and open-source contributors. <visualstudio.microsoft.com/downloads>
+benefit from using Visual Studio. The [community](www.visualstudio.microsoft.com/downloads)
+version is free of charge for individuals and open-source contributors. 
 
 Since the debugging facilities within *DXLog.net* are very limited, a more 
 advanced SDK like Visual Studio is a great help.
