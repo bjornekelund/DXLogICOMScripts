@@ -1,7 +1,6 @@
 ﻿# DXLog.net script kit for IC-7610 
  
- ## Requires DXLog.net 2.3.18 which is still not released
- ## Custom ICOM CAT commands is broken in the current stable 2.3.17
+ ## Requires DXLog.net 2.3.18 which is still not released. Custom ICOM CAT commands is broken in the current stable 2.3.17
 
 These scripts are used entirely at your own risk. Since the scripts control hardware, 
 including things like transmitter output power, they can cause 
@@ -58,10 +57,10 @@ The proposed keys above is consistent with movement in the bandmap, where the
 frequency increases downwards. 
 
 An very valuable feature in DXLog.net is the possibility to invoke scripts 
-from key macros. The syntax is *$!SCRIPTNAME* where *SCRIPTNAME* is the name that 
+from key macros. The syntax is `$!SCRIPTNAME` where `SCRIPTNAME` is the name that 
 you assign to the script in the Tools->Scripts Manager menu. 
 It is highly recommended to use this to reset the RIT in the F1/CQ macro. 
-Simply add *$!ICOMRITCLEAR* to the end of the F1 macro definition. 
+Simply add `$!ICOMRITCLEAR` to the end of the F1 macro definition. 
 Additionally, some prefer to do this also in the run F3/TU-Log macro. 
 
 ## Scripts description
@@ -103,7 +102,7 @@ Should be assigned to a key for quick restore after manual adjustments or zoom.
 Only operates on VFO A but supports all operating modes; SO1R, SO2R and SO2V.
 Only active for ICOM radios but does not actually poll the radio to determine 
 if it is waterfall capable. For e.g. SO2R operation with two ICOM radios where 
-only one is waterfall capable, modify the object *WaterfallCapable[]* accordingly.
+only one is waterfall capable, modify the object `WaterfallCapable[]` accordingly.
 
 **ICOM_Waterfall_Zoom** Script to quickly zoom the radio's built in panadapter to a 
 narrow segment of the band (default is 20kHz, but easily modified in the script code) 
