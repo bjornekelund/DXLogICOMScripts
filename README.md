@@ -1,4 +1,7 @@
 ﻿# DXLog.net script kit for IC-7610 
+ 
+ ## Requires DXLog.net 2.3.18 which is still not released
+ ## Custom ICOM CAT commands is broken in the current stable 2.3.17
 
 These scripts are used entirely at your own risk. Since the scripts control hardware, 
 including things like transmitter output power, they can cause 
@@ -22,7 +25,7 @@ If the editor complains about syntax/usage (red wavy lines) make sure you have
 references to the DXLog DLL and EXE files correctly set up. You can add this in 
 the *Solution Explorer* panel. If you see yellow warning triangles, re-enter/add 
 the references by right-clicking "References" and selecting them in the 
-DXLog.net binary folder, typically C:\Program Files (x86)\DXLog.net.
+DXLog.net binary folder, typically *C:\Program Files (x86)\DXLog.net*.
 
 Since you may want to modify the scripts over time (setting output power etc.), 
 it is also a good idea to pin this project to Visual Studio's startup panel.
@@ -92,7 +95,7 @@ radio 2 are the same physical radio in SO2V, and the script event is only raised
 changes, it must unfortunately ignore the speed of radio 2 in SO2V. 
 Should this be an actual problem, you can redesign **ICOM_SO2V** to also update the 
 radio's keyer speed setting at focus changes. Each logical radio's current speed is 
-available in the object *mainForm._cwKeyer.CWSpeed(int radioNumber)*
+available in the object `mainForm._cwKeyer.CWSpeed(int radioNumber)`
 
 **ICOM_Waterfall_Mode** Automatically sets the edges and reference level of the 
 radio's waterfall/spectrum display based on frequency band and operating mode. 
