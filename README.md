@@ -13,7 +13,7 @@ done using any source code editor (*notepad++* is a good choice.)
 
 Any more sophisticated modification and/or extension of the scripts will greatly 
 benefit from using Visual Studio. The community version is free of charge for 
-individuals and open-source contributors. visualstudio.microsoft.com/downloads
+individuals and open-source contributors. <visualstudio.microsoft.com/downloads>
 
 Since the debugging facilities within *DXLog.net* are very limited, a more 
 advanced SDK like Visual Studio is a great help.
@@ -29,7 +29,7 @@ DXLog.net binary folder, typically *C:\Program Files (x86)\DXLog.net*.
 Since you may want to modify the scripts over time (setting output power etc.), 
 it is also a good idea to pin this project to Visual Studio's startup panel.
 
-To install the scripts in DXLog, enter the scripts manager (Tools->Scripts manager)
+To install the scripts in *DXLog.net*, enter the scripts manager (Tools->Scripts manager)
 Add the scripts one by one, give them a good name and assign a key those that need it.
 
 
@@ -52,11 +52,11 @@ Q, R, U, V, X, and Y.
 The choice of **Shift-Up** vs. **Shift-down** is based on personal preferences. 
 Some prefer them to correspond to the up/down movement in the band map, others 
 prefer them to correspond to up/down in pitch. 
-Remember that pitch depends on whether you use USB or LSB for CW. 
-The proposed keys above is consistent with movement in the bandmap, where the 
+Remember that pitch "direction" depends on whether you use USB or LSB for CW. 
+The proposed key mapping above is consistent with movement in the bandmap, where the 
 frequency increases downwards. 
 
-An very valuable feature in DXLog.net is the possibility to invoke scripts 
+An very valuable feature in *DXLog.net* is the possibility to invoke scripts 
 from key macros. The syntax is `$!SCRIPTNAME` where `SCRIPTNAME` is the name that 
 you assign to the script in the Tools->Scripts Manager menu. 
 It is highly recommended to use this to reset the RIT in the F1/CQ macro. 
