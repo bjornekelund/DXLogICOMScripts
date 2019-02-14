@@ -112,7 +112,7 @@ centered around the current frequency.
 
 Please note that due to the design of *DXLog.net's* CAT queueing mechanics, 
 performance may not be completely reliable at 19200bps with frequent polling (< 300ms). 
-For the most reliable and responsive operation, the communication via the USB interface 
+For the most reliable and responsive operation, communication via the USB interface 
 at 115200bps is recommended.
 
 For additional informatin, see the source code or www.sm7iun.se
