@@ -1,16 +1,18 @@
 ﻿# DXLog.net script kit for IC-7610 
  
- ## Requires DXLog.net 2.3.18 which is still not released. Custom ICOM CAT commands is broken in the current stable 2.3.17
+ ## NB. Requires DXLog.net 2.3.18 which is still not released. Custom ICOM CAT commands is broken in the current stable 2.3.17
 
-These scripts are used entirely at your own risk. Since the scripts control hardware, 
+*These scripts are used entirely at your own risk. Since the scripts control hardware, 
 including things like transmitter output power, they can cause 
-hardware damage due to latent software defects or if wrongly configured or used.
+hardware damage due to latent software defects or if wrongly configured or used.*
 
-The script kit is written for and verified on IC-7610 but will likely work for all 
-waterfall capable ICOM radios in the 7000 family.
+The script kit is written for and verified on ICOM IC-7610 and IC-7300 and will, 
+with the exception of waterfall support, likely 
+work with other ICOM radios in the 7000 family. 
+Should you find any anomalies or defects when used with other radios, email me or make a pull request.
+
 Minor modifications of the scripts (e.g. changing power levels or band edges) can be 
 done using any source code editor (*notepad++* is a good choice.)
-
 Any more sophisticated modification and/or extension of the scripts will greatly 
 benefit from using Visual Studio. The [community](https://visualstudio.microsoft.com/downloads)
 version is free of charge for individuals and open-source contributors. 
@@ -18,13 +20,13 @@ version is free of charge for individuals and open-source contributors.
 Since the debugging facilities within *DXLog.net* are very limited, a more 
 advanced SDK like Visual Studio is a great help.
 The script kit is formatted for use in Visual Studio. Once cloned or 
-downloaded/decompressed, just double-click on the file *DXLogICOMScripts.sln*.
+downloaded/decompressed, just double-click on the file `DXLogICOMScripts.sln`.
 
 If the editor complains about syntax/usage (red wavy lines) make sure you have 
-references to the DXLog DLL and EXE files correctly set up. You can add this in 
+references to the *DXLog.net* `DLL` and `EXE` files correctly set up. You can add this in 
 the *Solution Explorer* panel. If you see yellow warning triangles, re-enter/add 
 the references by right-clicking "References" and selecting them in the 
-DXLog.net binary folder, typically *C:\Program Files (x86)\DXLog.net*.
+*DXLog.net* binary folder, typically `C:\Program Files (x86)\DXLog.net`.
 
 Since you may want to modify the scripts over time (setting output power etc.), 
 it is also a good idea to pin this project to Visual Studio's startup panel.
