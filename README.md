@@ -23,10 +23,11 @@ The script kit is formatted for use in Visual Studio. Once cloned or
 downloaded/decompressed, just double-click on the file `DXLogICOMScripts.sln`.
 
 If the editor complains about syntax/usage (red wavy lines) make sure you have 
-references to the *DXLog.net* `DLL` and `EXE` files correctly set up. You can add this in 
-the *Solution Explorer* panel. If you see yellow warning triangles, re-enter/add 
-the references by right-clicking "References" and selecting them in the 
-*DXLog.net* binary folder, typically `C:\Program Files (x86)\DXLog.net`.
+references to the *DXLog.net* `DLL` and `EXE` files correctly set up. 
+You can add this in the *Solution Explorer* panel. If you see yellow warning 
+triangles, re-enter/add the references by right-clicking "References" and 
+selecting them in the *DXLog.net* binary folder, 
+typically `C:\Program Files (x86)\DXLog.net`.
 
 Since you may want to modify the scripts over time (setting output power etc.), 
 it is also a good idea to pin this project to Visual Studio's startup panel.
