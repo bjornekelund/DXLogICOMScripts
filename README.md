@@ -118,4 +118,4 @@ performance may not be completely reliable at 19200bps with frequent polling (< 
 For the most reliable and responsive operation, communication via the USB interface 
 at 115200bps is recommended.
 
-For additional informatin, see the source code or [www.sm7iun.se](https://sm7iun.ekelund.nu/contest#h.p_OZbmNmGdGN_c)
+For additional informatin, see the source code or [www.sm7iun.se](https://sm7iun.ekelund.nu/contest#h.p_VfyCy5qWpJay)
