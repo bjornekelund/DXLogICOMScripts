@@ -6,10 +6,17 @@
 including things like transmitter output power, they can cause 
 hardware damage due to latent software defects or if wrongly configured or used.*
 
-The script kit is written for and verified on ICOM IC-7610 and IC-7300 and will, 
-with the exception of waterfall support, likely 
-work with other ICOM radios in the 7000 family. 
+Script kit (in experimental status) designed for enhancing SO2V contest operation with
+ICOM IC-7610 and IC-78xx but also useful for IC-7300. It is only verified on IC-7610 and IC-7300.
 Should you find any anomalies or defects when used with other radios, email me or make a pull request.
+
+Main features are:
+* Automatic focus shifting for radio's Main VFO knob in SO2V.
+* Automatic main/sub audio switching in SO2V. (Ctrl-Alt-S or AltGr-S toggles permanent stereo.)
+* Automatic per-band output power level for safe PA operation. (Even supports cross-band SO2V if PA band switching is fast.)
+* RIT (in Run) and Frequency adjust (in S&P) using shifted arrow keys.
+* Automatic setting of edges and reference level for the waterfall/spectrum display based on band and operating mode.
+* Single-key waterfall/spectrum display zoom.
 
 Minor modifications of the scripts (e.g. changing power levels or band edges) can be 
 done using any source code editor (*notepad++* is a good choice.)
