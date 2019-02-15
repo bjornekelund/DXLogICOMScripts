@@ -60,9 +60,9 @@ The proposed key mapping above is consistent with movement in the bandmap, where
 frequency increases downwards. 
 
 An very valuable feature in *DXLog.net* is the possibility to invoke scripts 
-from key macros. The syntax is `$!SCRIPTNAME` where `SCRIPTNAME` is the name that 
-you assign to the script in the Tools->Scripts Manager menu. 
-It is highly recommended to use this to reset the RIT in the F1/CQ macro. 
+from key macros. The syntax is `$!SCRIPTNAME` where `SCRIPTNAME` is the name  
+assigned to the script in the scripts manager. (*Tools->Scripts Manager*)
+It is recommended to use this to reset the RIT in the F1/CQ macro. 
 Simply add `$!ICOMRITCLEAR` to the end of the F1 macro definition. 
 Additionally, some prefer to do this also in the run F3/TU-Log macro. 
 
@@ -73,7 +73,7 @@ Typically not used for low power/barefoot operation. Edit the power level table
 to set safe levels for each band and adjust level manually if required. 
 Only ivoked at band changes. 
 
-**ICOM_RIT_Plus** **ICOM_RIT_Minus** **ICOM_RIT_Clear** Three scripts for 
+**ICOM_RIT_Plus**, **ICOM_RIT_Minus**, and **ICOM_RIT_Clear** Three scripts for 
 RIT (during Run) and frequency (during S&P) adjustment 
 using shifted arrow keys. Plus and minus refers to actual frequency change. 
 
