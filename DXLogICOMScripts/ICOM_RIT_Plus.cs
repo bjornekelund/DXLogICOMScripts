@@ -15,7 +15,6 @@
 // By Björn Ekelund SM7IUN bjorn@ekelund.nu 2019-01-31
 
 using System;
-using System.Windows.Forms;
 using IOComm;
 
 namespace DXLog.net
@@ -50,6 +49,7 @@ namespace DXLog.net
                 return;
             }
 
+            // Only check for radio 2 presence in SO2R
             if ((radio2 == null) && modeIsSO2R)
             {
                 main.SetMainStatusText("IcomRitPlus: Radio 2 is not available.");

@@ -5,10 +5,10 @@
 // to key for stereo/main toggling when Radio 1 (main receiver in SO2V) is 
 // selected. Key used is typically § (on EU keyboard) or `(on US keyboard) 
 // to maintain muscle-memory compatibility with N1MM.
-// Tested on IC-7610 but should work on all dual receiver ICOM radios
+// Tested on IC-7610 but should work on most dual receiver ICOM radios.
 // Use Ctrl-Alt-S/AltGr-S to toggle between permanent dual receive and 
-// only dual only when sub receiver is focused. Pressing Ctrl-Alt-S does 
-// not trigger an event, thus any change in audio mode will not come 
+// only dual only when sub receiver is focused. Since pPressing Ctrl-Alt-S 
+// does not trigger an event, any change in audio mode will not come 
 // into force until the next focus switch. 
 // Only active for ICOM radio but does not verify radio is SO2V capable
 // By Björn Ekelund SM7IUN bjorn@ekelund.nu 2019-01-31
@@ -31,6 +31,7 @@ namespace DXLog.net
         readonly byte[] IcomSplitOff = { 0x0F, 0x00 };
         bool tempStereoAudio;
 
+        // Executes at DXLog.net start 
         public void Initialize(FrmMain main)
         {
             CATCommon radio1 = main.COMMainProvider.RadioObject(1);
@@ -52,7 +53,7 @@ namespace DXLog.net
                 }
         }
 
-        public void Deinitialize() { }
+        public void Deinitialize() { } // Do nothing at DXLog.net close down
 
         // Toggle dual watch, execution of Main is mapped to a key, typically in upper left corner of keyboard
         public void Main(FrmMain main, ContestData cdata, COMMain comMain)

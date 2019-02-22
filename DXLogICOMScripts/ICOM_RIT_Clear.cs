@@ -2,11 +2,10 @@
 //INCLUDE_ASSEMBLY System.Windows.Forms.dll
 
 // ICOM RIT clear and disable, typically mapped to Shift-Left and/or Shift-Delete
-// Disables RIT on the focused radio.
+// Disables RIT on the currently focused radio.
 // By Björn Ekelund SM7IUN bjorn@ekelund.nu 2019-01-31
 
 using System;
-using System.Windows.Forms;
 using IOComm;
 
 namespace DXLog.net
@@ -31,7 +30,8 @@ namespace DXLog.net
                 return;
             }
 
-            if (cdata.RadioModePrimary == 1) return; // if S&P, do nothing
+            // if S&P, do nothing
+            if (cdata.RadioModePrimary == 1) return; 
 
             radioObject.RitOffSet = 0;
 

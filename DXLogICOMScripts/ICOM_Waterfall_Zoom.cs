@@ -1,12 +1,12 @@
 //INCLUDE_ASSEMBLY System.dll
 //INCLUDE_ASSEMBLY System.Windows.Forms.dll
 
-// ICOM waterfall/spectrum display management
+// ICOM waterfall/spectrum display management.
 // Mapped to suitable key for creating a +/- WaterfallWidth fixed spectrum display  
 // Does not support dual spectrum display and thus only considers VFO A.
 // Works for all supported operating "techniques" SO1R, SO2R and SO2V.
-// Only active for ICOM radio but does not verify radio is Waterfall capable
-// Waterfall capability is defined in readonly variable WaterfallCapable[]
+// Only active for ICOM radio but does not verify radio is Waterfall capable.
+// Waterfall capability is defined in readonly variable WaterfallCapable[].
 // By Björn Ekelund SM7IUN bjorn@ekelund.nu 2019-01-30
 
 using System;
@@ -38,7 +38,8 @@ namespace DXLog.net
             true  // Radio 2
         };
 
-        static readonly int[,] RefLevel = new int[2,75]; // Extend to 75 to avoid crash with 4m capable radios
+        // Extend to 75 to avoid crash with 4m capable radios
+        static readonly int[,] RefLevel = new int[2,75]; 
 
         // Maps actual MHz to radio's scope edge set on ICOM 7800, 785x, 7300 and 7610
         static readonly int[] RadioEdgeSet = new int[] { 1, 2, 3, 3, 3, 3, 4, 4, 5, 5, 5, 6,
@@ -85,21 +86,23 @@ namespace DXLog.net
             // Radio index is radio number - 1 for SO2R, otherwise 0 which represents radio 1
             int usedRadioIndex = ((cdata.OPTechnique == 1) || (cdata.OPTechnique == 2)) ? RadioNumber - 1 : 0;
 
-            if ((cdata.OPTechnique == 4) && (RadioNumber == 2)) // If on VFO B in SO2V, do nothing and return
-                return;
+            // If on VFO B in SO2V, do nothing and return
+            if ((cdata.OPTechnique == 4) && (RadioNumber == 2)) 
+            return;
 
-            if (!WaterfallCapable[usedRadioIndex]) // If not waterfall capable, do nothing and return
-                return;
+            // If not waterfall capable, do nothing and return
+            if (!WaterfallCapable[usedRadioIndex]) 
+            return;
 
-            usedRadio = main.COMMainProvider.RadioObject(usedRadioIndex + 1); // only do when we know we have a valid radio index
+            // only do when we know we have a valid radio index
+            usedRadio = main.COMMainProvider.RadioObject(usedRadioIndex + 1);
 
-            if (usedRadio == null) // No CAT capable radio present
+            // If no CAT capable radio present
+            if (usedRadio == null) 
             {
                 main.SetMainStatusText(string.Format("IcomWaterfallZoom: Radio {0} is not available.", usedRadioIndex + 1));
                 return;
             }
-
-            //frmMain.SetMainStatusText(string.Format("IcomBandChange: Handler: usedRadioIndex = {0}", usedRadioIndex));
 
             megaHertz = (int)(usedRadio.VFOAFrequency / 1000.0);
 

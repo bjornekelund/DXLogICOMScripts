@@ -1,15 +1,16 @@
 //INCLUDE_ASSEMBLY System.dll
 //INCLUDE_ASSEMBLY System.Windows.Forms.dll
 
-// ICOM waterfall/spectrum display management for IC-785x, IC-7300 and IC-7610
-// Sets waterfall/spectrum display range based on band and operating mode
-// Invoked automatically at band changes made either on radio or in DXLog
-// but also via a mapped key for restoring range and ref level e.g. after manual adjustments
-// Does not support dual spectrum display and thus only considers VFO A.
+// ICOM waterfall/spectrum display management for IC-785x, IC-7300 and IC-7610.
+// Sets waterfall/spectrum display range based on band and operating mode.
+// Invoked automatically at band changes made either on radio or in DXLog.net
+// but also via a mapped key for restoring range and ref level e.g. after 
+// manual adjustments.
+// Does not support dual spectrum display and only considers VFO A.
 // Works for all supported operating "techniques" SO1R, SO2R and SO2V.
-// Only active for ICOM radio but does not verify that radio is Waterfall capable
-// Waterfall capability is defined in readonly variable WaterfallCapable[]
-// Separate frequency and ref levels for radio 1 and radio 2
+// Only active for ICOM radio but does not verify that radio is Waterfall capable.
+// Waterfall capability is defined in readonly variable WaterfallCapable[].
+// Separate frequency and ref levels for radio 1 and radio 2.
 // By Björn Ekelund SM7IUN bjorn@ekelund.nu 2019-01-30
 
 using System;
@@ -115,17 +116,20 @@ namespace DXLog.net
             if ((RadioNumber != 1) && (RadioNumber != 2)) // If just a focus change, do nothing and return
                 return;
 
-            if ((cdata.OPTechnique == 4) && (RadioNumber == 2)) // If changing band on VFO B in SO2V, do nothing and return
-                return;
+            // If changing band on VFO B in SO2V, do nothing and return
+            if ((cdata.OPTechnique == 4) && (RadioNumber == 2)) 
+            return;
 
-            if (!WaterfallCapable[usedRadioIndex]) // If selected radio is not waterfall capable, do nothing and return
-                return;
+            // If selected radio is not waterfall capable, do nothing and return
+            if (!WaterfallCapable[usedRadioIndex]) 
+            return;
 
             usedRadio = frmMain.COMMainProvider.RadioObject(usedRadioIndex + 1); 
 
             if (usedRadio == null) // No CAT capable radio present
             {
-                frmMain.SetMainStatusText(string.Format("IcomWaterfallMode: Radio {0} is not available.", usedRadioIndex + 1));
+                frmMain.SetMainStatusText(string.Format("IcomWaterfallMode: Radio {0} is not available.", 
+                    usedRadioIndex + 1));
                 return;
             }
 

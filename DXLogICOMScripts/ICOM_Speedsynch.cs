@@ -2,14 +2,13 @@
 //INCLUDE_ASSEMBLY System.Windows.Forms.dll
 //INCLUDE_ASSEMBLY CWKeyer.dll
 
-// ICOM Synchronization of built-in keyer with DXLog
-// Event driven, not mapped to any key
+// ICOM Synchronization of built-in keyer with DXLog.net.
+// Event driven, not mapped to any key.
 // Works for up to two radios in all operating scenarios with the exception 
-// of VFO B in SO2V where the speed is ignored
+// of VFO B in SO2V where the speed is ignored.
 // By Björn Ekelund SM7IUN bjorn@ekelund.nu 2019-01-31
 
 using System;
-using System.Windows.Forms;
 using CWKeyer;
 using IOComm;
 
@@ -24,14 +23,18 @@ namespace DXLog.net
 	    public void Initialize(FrmMain main)
 	    {
             mainForm = main;
+
+            // Subscribe to speed change event
             if (mainForm._cwKeyer != null)
                 mainForm._cwKeyer.CWSpeedChange += new CWKey.CWSpeedChangeDelegate(HandleCWSpeedChange);
 	    }
 
 	    public void Deinitialize() { }
 
+        // No key is mapped to this script
         public void Main(FrmMain main, ContestData cdata, COMMain comMain) { }
 
+        // Executes every time DXLog.net keyer speed is changed 
         private void HandleCWSpeedChange(int radioNumber, int newSpeed)
         {
             CATCommon radioObject = mainForm.COMMainProvider.RadioObject(radioNumber);

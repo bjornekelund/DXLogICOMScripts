@@ -2,12 +2,12 @@
 //INCLUDE_ASSEMBLY System.Windows.Forms.dll
 
 // ICOM per band output power for IC-785x, IC-7300 and IC-7610
-// Sets output power to a safe level when QSY 
+// Sets output power to a safe level at band changes.
 // Invoked automatically at band changes made either on radio or in DXLog
 // but can also be mapped to a key for restoring level e.g. after manual adjustments
-// Only active for ICOM radios 
+// Only active for ICOM radios.
 // Please note that cross-band operation in SO2V with PA requires fast reacting band 
-// switching, CI-V based PA band switching may not be sufficiently fast. 
+// switching, CI-V based PA band switching may not be sufficiently fast.
 // By Björn Ekelund SM7IUN bjorn@ekelund.nu 2019-01-29
 
 using System;

@@ -15,7 +15,6 @@
 // By Björn Ekelund SM7IUN bjorn@ekelund.nu 2019-01-31
 
 using System;
-using System.Windows.Forms;
 using IOComm;
 
 namespace DXLog.net
