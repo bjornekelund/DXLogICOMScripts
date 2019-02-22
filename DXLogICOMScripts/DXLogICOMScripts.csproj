@@ -53,25 +53,25 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CWKeyer">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\DXLog.net\CWKeyer.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DXLog.net\CWKeyer.dll</HintPath>
     </Reference>
     <Reference Include="DXLComm">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\DXLog.net\DXLComm.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DXLog.net\DXLComm.dll</HintPath>
     </Reference>
     <Reference Include="DXLog.net">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\DXLog.net\DXLog.net.exe</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DXLog.net\DXLog.net.exe</HintPath>
     </Reference>
     <Reference Include="DXLog.net.COM">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\DXLog.net\DXLog.net.COM.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DXLog.net\DXLog.net.COM.dll</HintPath>
     </Reference>
     <Reference Include="DXLogCalculators">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\DXLog.net\DXLogCalculators.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DXLog.net\DXLogCalculators.dll</HintPath>
     </Reference>
     <Reference Include="DXLogDAL">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\DXLog.net\DXLogDAL.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DXLog.net\DXLogDAL.dll</HintPath>
     </Reference>
     <Reference Include="IOComm">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\DXLog.net\IOComm.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DXLog.net\IOComm.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
