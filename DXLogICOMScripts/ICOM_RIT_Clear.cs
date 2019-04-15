@@ -22,7 +22,14 @@ namespace DXLog.net
 
         public void Main(FrmMain main, ContestData cdata, COMMain comMain)
         {
-            CATCommon radioObject = comMain.RadioObject(cdata.FocusedRadio);
+            CATCommon radioObject;
+            bool modeIsSO2V = (cdata.OPTechnique == 4);
+
+            if (modeIsSO2V) // if SO2V reset RIT on physical radio 1 regardless if VFO A or B are focused
+                radioObject = comMain.RadioObject(1);
+            else
+                radioObject = comMain.RadioObject(cdata.FocusedRadio);
+
 
             if (radioObject == null)
             {

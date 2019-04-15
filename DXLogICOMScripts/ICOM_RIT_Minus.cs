@@ -58,7 +58,7 @@ namespace DXLog.net
             if (focusedRadio == 1)
             {
                 if (radio1modeIsRun)
-                { // If radio 1 is focursed and RUN, do RIT regardless of operating technique
+                { // If radio 1 is focused and RUN, do RIT regardless of operating technique
                     currentRit = radio1.RitOffSet += FrequencyStep;
                     currentAbsRit = Math.Abs(currentRit);
 
@@ -72,7 +72,7 @@ namespace DXLog.net
                     if (Debug) main.SetMainStatusText(String.Format("IcomRitMinus: Radio 1: RIT offset = {0}", radio1.RitOffSet));
                 }
                 else
-                { // If radio 1 is focuesd and S&P, do frequency adjustment regardless of op technique
+                { // If radio 1 is focused and S&P, do frequency adjustment regardless of op technique
                     radio1.SetVFOAFrequency(cdata.Radio1_FreqA + FrequencyStep / 1000.0);
                     if (Debug) main.SetMainStatusText(String.Format("IcomRitMinus: Radio 1: VFO A: {0:F2}", cdata.Radio1_FreqA));
                 }
@@ -80,7 +80,7 @@ namespace DXLog.net
             else // radio 2 is focused
             {
                 if (radio2modeIsRun && modeIsSO2R)
-                { /// If radio 2 is focursed and SO2R and RUN, do RIT on radio 2 
+                { /// If radio 2 is focused and SO2R and RUN, do RIT on radio 2 
                     currentRit = radio2.RitOffSet += FrequencyStep;
                     currentAbsRit = Math.Abs(currentRit);
 
