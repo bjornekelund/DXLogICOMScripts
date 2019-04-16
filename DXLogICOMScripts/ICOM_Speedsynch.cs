@@ -16,9 +16,9 @@ namespace DXLog.net
 {
     public class IcomSpeedSync : ScriptClass
     {
+        readonly bool Debug = false;
         FrmMain mainForm;
         static byte[] IcomSetSpeed = new byte[4] { 0x14, 0x0C, 0x00, 0x00 };
-        readonly bool Debug = true;
 
 	    public void Initialize(FrmMain main)
 	    {

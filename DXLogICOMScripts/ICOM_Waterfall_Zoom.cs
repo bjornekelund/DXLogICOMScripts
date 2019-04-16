@@ -16,6 +16,7 @@ namespace DXLog.net
 {
     public class IcomWaterfallZoom : ScriptClass
     {
+        static readonly bool debug = false;
         ContestData cdata;
         FrmMain mainForm;
 
@@ -29,8 +30,6 @@ namespace DXLog.net
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
         static byte[] IcomSetRefLevel = new byte[6] { 0x27, 0x19, 0x00, 0x00, 0x00, 0x00 };
         static readonly double WaterfallWidth = 20.0; // Width of zoomed waterfall
-
-        static readonly bool debug = false;
 
         // Waterfall capability of radio 1 and radio 2, only meaningful in SO2R
         static readonly bool[] WaterfallCapable = new bool[] {

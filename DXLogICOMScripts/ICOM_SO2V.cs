@@ -20,12 +20,12 @@ using IOComm;
 
 namespace DXLog.net
 {
-    public class IcomSo2v : ScriptClass
+    public class IcomSO2V : ScriptClass
     {
+        readonly bool Debug = false;
         ContestData cdata;
         FrmMain mainForm;
 
-        readonly bool Debug = true;
         readonly byte[] IcomDualWatchOn = { 0x07, 0xC1 };
         readonly byte[] IcomDualWatchOff = { 0x07, 0xC0 };
         readonly byte[] IcomSelectMain = { 0x07, 0xD0 };
@@ -73,14 +73,14 @@ namespace DXLog.net
                     if (radio1Present)
                         radio1.SendCustomCommand(IcomDualWatchOff);
                     if (Debug)
-                        main.SetMainStatusText(String.Format("IcomSo2v: Focus is Radio #1, Main Receiver"));
+                        main.SetMainStatusText(String.Format("IcomSO2V: Focus is Radio #1, Main Receiver"));
                 }
             else
                 {
                     if (radio1Present)
                         radio1.SendCustomCommand(IcomDualWatchOn);
                     if (Debug)
-                        main.SetMainStatusText(String.Format("IcomSo2v: Focus is Radio #1, Stereo"));
+                        main.SetMainStatusText(String.Format("IcomSO2V: Focus is Radio #1, Stereo"));
                 }
             tempStereoAudio = !tempStereoAudio;
         }
@@ -98,7 +98,7 @@ namespace DXLog.net
 
             if (radio1 == null)
             {
-                mainForm.SetMainStatusText("IcomSo2v: Radio 1 is not available.");
+                mainForm.SetMainStatusText("IcomSO2V: Radio 1 is not available.");
                 return;
             }
 
@@ -119,13 +119,13 @@ namespace DXLog.net
                 if (stereoAudio || (focusedRadio == 2))
                 {
                     radio1.SendCustomCommand(IcomDualWatchOn);
-                    if (Debug) mainForm.SetMainStatusText(String.Format("IcomSo2v: Listenmode {0}. Focus is Radio #{1}, Dual Watch. Keyer speed = {2}", 
+                    if (Debug) mainForm.SetMainStatusText(String.Format("IcomSO2V: Listenmode {0}. Focus is Radio #{1}, Dual Watch. Keyer speed = {2}", 
                         listenMode, focusedRadio, mainForm._cwKeyer.CWSpeed(focusedRadio)));
                 }
                 else
                 {
                     radio1.SendCustomCommand(IcomDualWatchOff);
-                    if (Debug) mainForm.SetMainStatusText(String.Format("IcomSo2v: Listenmode {0}. Focus is Radio #{1}, Main Receiver. Keyer speed = {2}",
+                    if (Debug) mainForm.SetMainStatusText(String.Format("IcomSO2V: Listenmode {0}. Focus is Radio #{1}, Main Receiver. Keyer speed = {2}",
                         listenMode, focusedRadio, mainForm._cwKeyer.CWSpeed(focusedRadio)));
                 }
 

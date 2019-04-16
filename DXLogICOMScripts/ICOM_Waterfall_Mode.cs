@@ -20,10 +20,9 @@ namespace DXLog.net
 {
     public class IcomWaterfallMode : ScriptClass
     {
+        static readonly bool debug = false;
         ContestData cdata;
         FrmMain mainForm;
-
-        static readonly bool debug = false;
 
         // Defines which of the radio's three edge sets is manipulated by script 
         static readonly byte UsedEdgeSet = 3;

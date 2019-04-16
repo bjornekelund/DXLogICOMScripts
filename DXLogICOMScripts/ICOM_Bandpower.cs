@@ -17,10 +17,10 @@ namespace DXLog.net
 {
     public class IcomBandPower : ScriptClass
     {
+        static readonly bool Debug = false;
         ContestData cdata;
         FrmMain mainForm;
 
-        static readonly bool Debug = false;
         static int EventCount = 0; // To work around an anomaly in how band change events are raised at startup
 
         // Predefined CI-V command strings
