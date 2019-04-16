@@ -7,7 +7,7 @@
 // to maintain muscle-memory compatibility with N1MM.
 // Tested on IC-7610 but should work on all modern dual receiver ICOM radios.
 // Use Ctrl-Alt-S/AltGr-S to toggle between permanent dual receive and 
-// only dual only when sub receiver is focused. Since pressing Ctrl-Alt-S 
+// dual receive only when sub receiver is focused. Since pressing Ctrl-Alt-S 
 // does not trigger an event, any change in audio mode will not come 
 // into force until the next focus switch. 
 // Only active for ICOM radio but does not verify radio is SO2V capable
