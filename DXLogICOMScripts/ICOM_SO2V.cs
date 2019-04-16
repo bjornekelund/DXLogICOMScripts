@@ -76,7 +76,7 @@ namespace DXLog.net
             tempStereoAudio = !tempStereoAudio;
         }
 
-        // Event handler invoked when switching between VFO in DXLog.net
+        // Event handler invoked when switching between radios (SO2R) or VFO (SO2V) in DXLog.net
         private void HandleFocusChange()
         {
             CATCommon radio1 = frmMain.COMMainProvider.RadioObject(1);
