@@ -7,7 +7,7 @@
 // Works for all supported operating "techniques" SO1R, SO2R and SO2V.
 // Only active for ICOM radio but does not verify radio is Waterfall capable.
 // Waterfall capability is defined in readonly variable WaterfallCapable[].
-// By Björn Ekelund SM7IUN bjorn@ekelund.nu 2019-01-30
+// By Björn Ekelund SM7IUN sm7iun@ssa.se 2019-01-30
 
 using System;
 using IOComm;
@@ -17,7 +17,7 @@ namespace DXLog.net
     public class IcomWaterfallZoom : ScriptClass
     {
         ContestData cdata;
-        FrmMain frmMain;
+        FrmMain mainForm;
 
         // Defines which of the radio's three edge sets is manipulated by script 
         static readonly byte UsedEdgeSet = 3; // which scope edge should be manipulated

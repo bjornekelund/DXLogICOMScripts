@@ -3,7 +3,7 @@
 
 // ICOM RIT clear and disable, typically mapped to Shift-Left and/or Shift-Delete
 // Disables RIT on the currently focused radio.
-// By Björn Ekelund SM7IUN bjorn@ekelund.nu 2019-01-31
+// By Björn Ekelund SM7IUN sm7iun@ssa.se 2019-01-31
 
 using System;
 using IOComm;

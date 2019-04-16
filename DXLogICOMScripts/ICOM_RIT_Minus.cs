@@ -12,7 +12,7 @@
 // Radio 2 focused with RUN in SO2V = No action
 // Radio 2 focused with S&P in SO2V = adjust VFO B on radio 1 
 
-// By Björn Ekelund SM7IUN bjorn@ekelund.nu 2019-01-31
+// By Björn Ekelund SM7IUN sm7iun@ssa.se 2019-01-31
 
 using System;
 using IOComm;

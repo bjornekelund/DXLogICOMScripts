@@ -11,7 +11,7 @@
 // Only active for ICOM radio but does not verify that radio is Waterfall capable.
 // Waterfall capability is defined in readonly variable WaterfallCapable[].
 // Separate frequency and ref levels for radio 1 and radio 2.
-// By Björn Ekelund SM7IUN bjorn@ekelund.nu 2019-01-30
+// By Björn Ekelund SM7IUN sm7iun@ssa.se 2019-01-30
 
 using System;
 using IOComm;
@@ -21,7 +21,7 @@ namespace DXLog.net
     public class IcomWaterfallMode : ScriptClass
     {
         ContestData cdata;
-        FrmMain frmMain;
+        FrmMain mainForm;
 
         static readonly bool debug = false;
 
@@ -83,7 +83,7 @@ namespace DXLog.net
             int radioIndex, bandIndex, modeIndex, i, megaHertz;
 
             cdata = main.ContestDataProvider;
-            frmMain = main;
+            mainForm = main;
 
             // Create look-up table based on actual frequency for simple look-up
             for (radioIndex = 0; radioIndex < 2; radioIndex++)
@@ -124,11 +124,11 @@ namespace DXLog.net
             if (!WaterfallCapable[usedRadioIndex]) 
             return;
 
-            usedRadio = frmMain.COMMainProvider.RadioObject(usedRadioIndex + 1); 
+            usedRadio = mainForm.COMMainProvider.RadioObject(usedRadioIndex + 1); 
 
             if (usedRadio == null) // No CAT capable radio present
             {
-                frmMain.SetMainStatusText(string.Format("IcomWaterfallMode: Radio {0} is not available.", 
+                mainForm.SetMainStatusText(string.Format("IcomWaterfallMode: Radio {0} is not available.", 
                     usedRadioIndex + 1));
                 return;
             }
@@ -161,7 +161,7 @@ namespace DXLog.net
             IcomSetRefLevel[5] = (refLevel >= 0) ? (byte)0 : (byte)1;
 
             if (debug)
-                frmMain.SetMainStatusText(
+                mainForm.SetMainStatusText(
                     string.Format("IcomWaterfallMode: Radio # {0} Modestring '{1}' Edge {2} Low {3} High {4} Ref {5} Commands: [{6}] [{7}]", 
                     usedRadioIndex + 1, usedRadio.VFOAMode, UsedEdgeSet, lowerEdge, upperEdge, refLevel, BitConverter.ToString(IcomSetEdges), 
                     BitConverter.ToString(IcomSetRefLevel)));

@@ -2,7 +2,7 @@
 //INCLUDE_ASSEMBLY System.Windows.Forms.dll
 
 // ICOM Experiment script for exploration of DXLog's inner workings
-// By Björn Ekelund SM7IUN bjorn@ekelund.nu 
+// By Björn Ekelund SM7IUN sm7iun@ssa.se 
 
 using System;
 using System.Text;
@@ -15,12 +15,12 @@ namespace DXLog.net
     public class Experiment : ScriptClass
     {
         ContestData cdata;
-        FrmMain frmMain;
+        FrmMain mainForm;
 
         public void Initialize(FrmMain main)
         {
             cdata = main.ContestDataProvider;
-            frmMain = main;
+            mainForm = main;
         }
 
         public void Deinitialize() { }
@@ -38,7 +38,7 @@ namespace DXLog.net
             //message = cdata.dalHeader.CWMessage1;
             //comMain.SendCWSmart(1, Encoding.ASCII.GetBytes(message));
             //frmMain._cwKeyer.CWMessageStack.Enqueue(message);
-            frmMain.SendCW(message, focusedRadio, true);
+            mainForm.SendCW(message, focusedRadio, true);
 
             main.SetMainStatusText(String.Format("Experiment! message = {0}", message));
         }

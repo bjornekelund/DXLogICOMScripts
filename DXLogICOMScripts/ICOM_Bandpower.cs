@@ -8,7 +8,7 @@
 // Only active for ICOM radios.
 // Please note that cross-band operation in SO2V with PA requires fast reacting band 
 // switching, CI-V based PA band switching may not be sufficiently fast.
-// By Björn Ekelund SM7IUN bjorn@ekelund.nu 2019-01-29
+// By Björn Ekelund SM7IUN sm7iun@ssa.se 2019-01-29
 
 using System;
 using IOComm;
@@ -18,7 +18,7 @@ namespace DXLog.net
     public class IcomBandPower : ScriptClass
     {
         ContestData cdata;
-        FrmMain frmMain;
+        FrmMain mainForm;
 
         static readonly bool Debug = false;
         static int EventCount = 0; // To work around an anomaly in how band change events are raised at startup
@@ -66,7 +66,7 @@ namespace DXLog.net
             CATCommon radio1 = main.COMMainProvider.RadioObject(1);
 
             cdata = main.ContestDataProvider;
-            frmMain = main;
+            mainForm = main;
 
             if (radio1 != null)                 // Only test if radio is ICOM if radio exist 
                 if (radio1.IsICOM())
@@ -87,7 +87,7 @@ namespace DXLog.net
 
         public void Main(FrmMain main, ContestData cdata, COMMain comMain)
         {
-            HandleBandChange(frmMain.ContestDataProvider.FocusedRadio);
+            HandleBandChange(mainForm.ContestDataProvider.FocusedRadio);
         }
 
         private void HandleBandChange(int RadioNumber)
@@ -110,11 +110,11 @@ namespace DXLog.net
             // usedRadio index is radio number - 1 for SO2R, otherwise 0 which represents radio 1
             int usedRadioIndex = ((cdata.OPTechnique == 1) || (cdata.OPTechnique == 2)) ? RadioNumber - 1 : 0;
 
-            usedRadio = frmMain.COMMainProvider.RadioObject(usedRadioIndex + 1);
+            usedRadio = mainForm.COMMainProvider.RadioObject(usedRadioIndex + 1);
 
             if (usedRadio == null) // No CAT capable radio present
             {
-                frmMain.SetMainStatusText(string.Format("IcomBandPower: Radio {0} is not available.", usedRadioIndex + 1));
+                mainForm.SetMainStatusText(string.Format("IcomBandPower: Radio {0} is not available.", usedRadioIndex + 1));
                 return;
             }
 
@@ -136,7 +136,7 @@ namespace DXLog.net
                 usedRadio.SendCustomCommand(IcomSetPower); // Set power
 
                 if (Debug)
-                    frmMain.SetMainStatusText(
+                    mainForm.SetMainStatusText(
                         string.Format("IcomBandPower: Band Change: Controlled radio #{0} Focused Radio #{1} megaHertz {2} Power {3}% UsedPower {4} Command: [{5}]",
                         usedRadioIndex + 1, RadioNumber, megaHertz, TxPower[usedRadioIndex, megaHertz],
                         usedPower, BitConverter.ToString(IcomSetPower)));
@@ -154,11 +154,11 @@ namespace DXLog.net
             // Logical radio 1 is VFO A, logical radio 2 is VFO B
             if (cdata.OPTechnique == 4) 
             {
-                usedRadio = frmMain.COMMainProvider.RadioObject(1);
+                usedRadio = mainForm.COMMainProvider.RadioObject(1);
 
                 if (usedRadio == null)
                 {
-                    frmMain.SetMainStatusText("IcomBandPower: Radio #1 is not available.");
+                    mainForm.SetMainStatusText("IcomBandPower: Radio #1 is not available.");
                     return;
                 }
 
@@ -180,14 +180,14 @@ namespace DXLog.net
                     usedRadio.SendCustomCommand(IcomSetPower); // Set power
 
                     if (Debug)
-                        frmMain.SetMainStatusText(
+                        mainForm.SetMainStatusText(
                             string.Format("IcomBandPower: Focus change: Phyiscal radio #1 Logical radio #{0} megaHertz {1} Power {2}% UsedPower {3} Command: [{4}]",
                             cdata.FocusedRadio, megaHertz, TxPower[0, megaHertz], usedPower, BitConverter.ToString(IcomSetPower)));
                 }
                 else
                 {
                     if (Debug)
-                        frmMain.SetMainStatusText(
+                        mainForm.SetMainStatusText(
                         string.Format("IcomBandPower: Focus change: Phyiscal radio #1 Logical radio #{0} No band change.",
                         cdata.FocusedRadio));
 
