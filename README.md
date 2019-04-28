@@ -1,6 +1,6 @@
 # DXLog.net script kit for IC-7610 
  
-## NB. Requires DXLog.net 2.3.18 which is soon to be released. Custom ICOM CAT commands is broken in the current stable 2.3.17
+## NB. Requires DXLog.net 2.3.18 which is currently in beta. Custom ICOM CAT commands is broken in the current stable 2.3.17
 
 *These scripts are used entirely at your own risk. Since the scripts control hardware, 
 including things like transmitter output power, they can cause 
@@ -54,7 +54,7 @@ Add the scripts one by one, give them a good name and assign a key those that ne
 | ICOM_Waterfall_Mode* | ICOMWFMODE     | Alt-U                                    | 
 | ICOM_Waterfall_Zoom* | ICOMWFZOOM     | Alt-Z                                    | 
 
-\* Redundant if the [ICOMautomagic2](https://github.com/bjornekelund/ICOMautomagic2) utility is used.
+\* Redundant and should not be enabled if the [ICOMautomagic2](https://github.com/bjornekelund/ICOMautomagic2) utility is used.
 
 The following **Alt keys** are unassigned by default in *DXLog.net*: H, Q, U, X, and Z.
 
@@ -77,15 +77,6 @@ Additionally, some prefer to do this also in the run F3/TU-Log macro.
 
 ## Scripts description
 
-**ICOM_Bandpower** Per band output power control to avoid overdriving a PA. 
-Typically not used for low power/barefoot operation. Edit the power level table 
-to set safe levels for each band and adjust level manually if required. 
-Only ivoked at band changes. 
-
-**ICOM_RIT_Plus**, **ICOM_RIT_Minus**, and **ICOM_RIT_Clear** Three scripts for 
-RIT (during Run) and frequency (during S&P) adjustment 
-using shifted arrow keys. Plus and minus refers to actual frequency change. 
-
 **ICOM_SO2V** Automatic switching of VFO knob focus and audio paths for SO2V operation 
 with ICOM IC-7610. It has not been tested but believed to be working also for IC-7800, 
 7850 and 7851. (All feedback is welcome.) In "Normal listening mode", selecting the 
@@ -105,6 +96,15 @@ Acts silently in the background, needs no key mapping. Works also for SO2R. Sinc
 radio 2 are the same physical radio in SO2V, and the script event is only raised at speed 
 changes, it unfortunately can not control the speed of radio 2 in SO2V. 
 For this reason **ICOM_SO2V** instead performs the speed synchronization at focus changes.
+
+**ICOM_RIT_Plus**, **ICOM_RIT_Minus**, and **ICOM_RIT_Clear** Three scripts for 
+RIT (during Run) and frequency (during S&P) adjustment 
+using shifted arrow keys. Plus and minus refers to actual frequency change. 
+
+**ICOM_Bandpower** Per band output power control to avoid overdriving a PA. 
+Typically not used for low power/barefoot operation. Edit the power level table 
+to set safe levels for each band and adjust level manually if required. 
+Only ivoked at band changes. 
 
 **ICOM_Waterfall_Mode** Automatically sets the edges and reference level of the 
 radio's waterfall/spectrum display based on frequency band and operating mode. 
