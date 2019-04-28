@@ -1,12 +1,12 @@
-﻿# DXLog.net script kit for IC-7610 
+# DXLog.net script kit for IC-7610 
  
- ## NB. Requires DXLog.net 2.3.18 which is still not released. Custom ICOM CAT commands is broken in the current stable 2.3.17
+## NB. Requires DXLog.net 2.3.18 which is soon to be released. Custom ICOM CAT commands is broken in the current stable 2.3.17
 
 *These scripts are used entirely at your own risk. Since the scripts control hardware, 
 including things like transmitter output power, they can cause 
 hardware damage due to latent software defects or if wrongly configured or used.*
 
-Script kit (in experimental status) designed for enhancing SO2V contest operation with
+This is a script kit designed for enhancing [DXLog.net](http://dxlog.net) SO2V contest operation with
 ICOM IC-7610 and IC-78xx but also useful for IC-7300. It is only verified on IC-7610 and IC-7300.
 Should you find any anomalies or defects when used with other radios, email me or make a pull request.
 
@@ -45,14 +45,16 @@ Add the scripts one by one, give them a good name and assign a key those that ne
 
 | Script              | Suggested Name | Suggested Key                            |
 |---------------------|----------------|------------------------------------------|
-| ICOM_Bandpower      | ICOMBANDPOWER  | -                                        |
+| ICOM_Bandpower*      | ICOMBANDPOWER  | -                                        |
 | ICOM_RIT_Clear      | ICOMRITCLEAR   | Shift-Left or Shift-Delete               | 
 | ICOM_RIT_Minus      | ICOMRITMINUS   | Shift-Up                                 | 
 | ICOM_RIT_Plus       | ICOMRITPLUS    | Shift-Down                               | 
 | ICOM_SO2V           | ICOMSO2V       | ` on english keyboard, § on Scandinavian | 
 | ICOM_Speedsynch     | ICOMSPEED      | -                                        | 
-| ICOM_Waterfall_Mode | ICOMWFMODE     | Alt-U                                    | 
-| ICOM_Waterfall_Zoom | ICOMWFZOOM     | Alt-Z                                    | 
+| ICOM_Waterfall_Mode* | ICOMWFMODE     | Alt-U                                    | 
+| ICOM_Waterfall_Zoom* | ICOMWFZOOM     | Alt-Z                                    | 
+
+\* Redundant if the [ICOMautomagic2](https://github.com/bjornekelund/ICOMautomagic2) utility is used.
 
 The following **Alt keys** are unassigned by default in *DXLog.net*: H, Q, U, X, and Z.
 
@@ -101,10 +103,8 @@ press the main receiver's AF gain knob to temporarily mute it.
 **ICOM_Speedsynch** Synchronizes the radio's internal keyer with *DXLog.net's* speed setting.
 Acts silently in the background, needs no key mapping. Works also for SO2R. Since radio 1 and 
 radio 2 are the same physical radio in SO2V, and the script event is only raised at speed 
-changes, it must unfortunately ignore the speed of radio 2 in SO2V. 
-Should this be an actual problem, you can redesign **ICOM_SO2V** to also update the 
-radio's keyer speed setting at focus changes. Each logical radio's current speed is 
-available in the object `mainForm._cwKeyer.CWSpeed(int radioNumber)`
+changes, it unfortunately can not control the speed of radio 2 in SO2V. 
+For this reason **ICOM_SO2V** instead performs the speed synchronization at focus changes.
 
 **ICOM_Waterfall_Mode** Automatically sets the edges and reference level of the 
 radio's waterfall/spectrum display based on frequency band and operating mode. 
@@ -125,4 +125,4 @@ performance may not be completely reliable at 19200bps with frequent polling (< 
 For the most reliable and responsive operation, communication via the USB interface 
 at 115200bps is recommended.
 
-For additional informatin, see the source code or [www.sm7iun.se](https://sm7iun.ekelund.nu/contest#h.p_VfyCy5qWpJay)
+For additional informatin, see the source code or [www.sm7iun.se](https://sm7iun.ekelund.nu/contest/dxlog-net)
