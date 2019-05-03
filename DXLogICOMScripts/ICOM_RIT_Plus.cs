@@ -73,7 +73,7 @@ namespace DXLog.net
                     if (Debug) main.SetMainStatusText(String.Format("IcomRitPlus: Radio 1: RIT offset = {0}", radio1.RitOffSet));
                 }
                 else
-                { // If radio 1 is focuesd and S&P, do frequency adjustment regardless of op technique
+                { // If radio 1 is focused and S&P, do frequency adjustment regardless of op technique
                     radio1.SetVFOAFrequency(cdata.Radio1_FreqA + FrequencyStep / 1000.0);
                     if (Debug) main.SetMainStatusText(String.Format("IcomRitPlus: Radio 1: VFO A: {0:F2}", cdata.Radio1_FreqA));
                 }
