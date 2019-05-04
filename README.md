@@ -11,12 +11,15 @@ ICOM IC-7610 and IC-78xx but also useful for IC-7300. It is only verified on IC-
 Should you find any anomalies or defects when used with other radios, email me or make a pull request.
 
 Main features are:
-* Automatic focus shifting for radio's Main VFO knob in SO2V.
-* Automatic main/sub audio switching in SO2V. (Ctrl-Alt-S or AltGr-S toggles permanent stereo.)
-* Automatic per-band output power level for safe PA operation. (Even supports cross-band SO2V if PA band switching is fast.)
-* Automatic setting of edges and reference level for the waterfall/spectrum display based on band and operating mode.
-* Single-key waterfall/spectrum display zoom.
-* Scripted trigger of radio's internal voice keyer (first five memories).
+1. Automatic focus shifting for radio's Main VFO knob in SO2V.
+2. Automatic main/sub audio switching in SO2V. (Ctrl-Alt-S or AltGr-S toggles permanent stereo.)
+3. Scripted trigger of radio's internal voice keyer (first five memories).
+4. Automatic per-band output power level for safe PA operation. (Even supports cross-band SO2V if PA band switching is fast.) 
+5. Automatic setting of edges and reference level for the waterfall/spectrum display based on band and operating mode. 
+6. Single-key waterfall/spectrum display zoom. 
+
+Note that if [Icom Automagic 2](https://github.com/bjornekelund/ICOMautomagic2) is used, items 4-6 are 
+redundant and should not be enabled. 
 
 Minor modifications of the scripts (e.g. changing power levels or band edges) can be 
 done using any source code editor (*notepad++* is a good choice.)
@@ -27,7 +30,8 @@ version is free of charge for individuals and open-source contributors.
 Since the debugging facilities within *DXLog.net* are very limited, a more 
 advanced SDK like Visual Studio is a great help.
 The script kit is formatted for use in Visual Studio. Once cloned or 
-downloaded/decompressed, just double-click on the file `DXLogICOMScripts.sln`.
+downloaded/decompressed, just double-click on the file `DXLogICOMScripts.sln` 
+to open the kit in Visual Studio.
 
 If the editor complains about syntax/usage (red wavy lines) make sure you have 
 references to the *DXLog.net* `DLL` and `EXE` files correctly set up. 
