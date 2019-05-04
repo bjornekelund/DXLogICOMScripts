@@ -7,8 +7,9 @@ including things like transmitter output power, they can cause
 hardware damage due to latent software defects or if wrongly configured or used.*
 
 This is a script kit designed for enhancing [DXLog.net](http://dxlog.net) SO2V contest operation with
-ICOM IC-7610 and IC-78xx but also useful for IC-7300. It is only verified on IC-7610 and IC-7300.
-Should you find any anomalies or defects when used with other radios, email me or make a pull request.
+ICOM IC-7610 and IC-78xx but it also contains functions useful for IC-7300. It is only verified on 
+IC-7610 and IC-7300. Should you find any anomalies or defects when used with other radios, please email
+me or make a pull request.
 
 Main features are:
 1. Automatic focus shifting for radio's Main VFO knob in SO2V.
@@ -18,8 +19,8 @@ Main features are:
 5. Automatic setting of edges and reference level for the waterfall/spectrum display based on band and operating mode. 
 6. Single-key waterfall/spectrum display zoom. 
 
-Note that if [Icom Automagic 2](https://github.com/bjornekelund/ICOMautomagic2) is used, items 4-6 are 
-redundant and should not be enabled. 
+Note that if the utility [Icom Automagic 2](https://github.com/bjornekelund/ICOMautomagic2) is used, 
+items 4-6 are redundant and should not be enabled. 
 
 Minor modifications of the scripts (e.g. changing power levels or band edges) can be 
 done using any source code editor (*notepad++* is a good choice.)
@@ -40,11 +41,11 @@ triangles, re-enter/add the references by right-clicking "References" and
 selecting them in the *DXLog.net* binary folder, 
 typically `C:\Program Files (x86)\DXLog.net`.
 
-Since you may want to modify the scripts over time (setting output power etc.), 
+Since you may want to modify the scripts over time (setting scope edges, output power etc.), 
 it is also a good idea to pin this project to Visual Studio's startup panel.
 
-To install the scripts in *DXLog.net*, enter the scripts manager (Tools->Scripts manager)
-Add the scripts one by one, give them a good name and assign a key those that need it.
+To install the scripts in *DXLog.net*, enter the scripts manager (Tools->Scripts manager),
+add the scripts one by one, give them a name and assign a key those that need it.
 
 
 | Script               | Suggested Name | Suggested Key                            |
