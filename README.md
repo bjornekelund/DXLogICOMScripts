@@ -54,11 +54,11 @@ Add the scripts one by one, give them a good name and assign a key those that ne
 | ICOM_Speedsynch      | SPEED          | None                                     | 
 | ICOM_Waterfall_Mode* | WFMODE         | Alt-U                                    | 
 | ICOM_Waterfall_Zoom* | WFZOOM         | Alt-Z                                    |
-| ICOM_DVK1            | DVK1           | None. $!DVK1 in scripts                  |
-| ICOM_DVK2            | DVK2           | None. $!DVK2 in scripts                  |
-| ICOM_DVK3            | DVK3           | None. $!DVK3 in scripts                  |
-| ICOM_DVK4            | DVK4           | None. $!DVK4 in scripts                  |
-| ICOM_DVK5            | DVK5           | None. $!DVK5 in scripts                  |
+| ICOM_DVK1            | DVK1           | E.g. F1. $!DVK1 in scripts               |
+| ICOM_DVK2            | DVK2           | E.g. F2. $!DVK2 in scripts               |
+| ICOM_DVK3            | DVK3           | Typically F-key. $!DVK3 in scripts       |
+| ICOM_DVK4            | DVK4           | Typically F-key. $!DVK4 in scripts       |
+| ICOM_DVK5            | DVK5           | Typically F-key. $!DVK5 in scripts       |
 | ICOM_DVKStop         | DVKStop        | ESC                                      |
 
 
