@@ -84,10 +84,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ICOM_Bandpower.cs" />
+    <Compile Include="ICOM_DVK1.cs" />
+    <Compile Include="ICOM_DVK2.cs" />
+    <Compile Include="ICOM_DVK3.cs" />
+    <Compile Include="ICOM_DVK4.cs" />
+    <Compile Include="ICOM_DVK5.cs" />
+    <Compile Include="ICOM_DVKStop.cs" />
     <Compile Include="ICOM_Experiment.cs" />
-    <Compile Include="ICOM_RIT_Clear.cs" />
-    <Compile Include="ICOM_RIT_Minus.cs" />
-    <Compile Include="ICOM_RIT_Plus.cs" />
     <Compile Include="ICOM_SO2V.cs" />
     <Compile Include="ICOM_Speedsynch.cs" />
     <Compile Include="ICOM_Waterfall_Mode.cs" />

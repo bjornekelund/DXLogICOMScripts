@@ -50,7 +50,8 @@ namespace DXLog.net
 
             if (radioObject == null)
             {
-                mainForm.SetMainStatusText(String.Format("IcomSpeedSynch: Radio {0} is not available!", physicalRadio));
+                mainForm.SetMainStatusText(String.Format("IcomSpeedSynch: Radio {0} is not available!", 
+                    physicalRadio));
                 return;
             }
 

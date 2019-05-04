@@ -14,9 +14,9 @@ Main features are:
 * Automatic focus shifting for radio's Main VFO knob in SO2V.
 * Automatic main/sub audio switching in SO2V. (Ctrl-Alt-S or AltGr-S toggles permanent stereo.)
 * Automatic per-band output power level for safe PA operation. (Even supports cross-band SO2V if PA band switching is fast.)
-* RIT (in Run) and Frequency adjust (in S&P) using shifted arrow keys.
 * Automatic setting of edges and reference level for the waterfall/spectrum display based on band and operating mode.
 * Single-key waterfall/spectrum display zoom.
+* Scripted trigger of radio's internal voice keyer (first five memories).
 
 Minor modifications of the scripts (e.g. changing power levels or band edges) can be 
 done using any source code editor (*notepad++* is a good choice.)
@@ -43,16 +43,20 @@ To install the scripts in *DXLog.net*, enter the scripts manager (Tools->Scripts
 Add the scripts one by one, give them a good name and assign a key those that need it.
 
 
-| Script              | Suggested Name | Suggested Key                            |
-|---------------------|----------------|------------------------------------------|
-| ICOM_Bandpower*      | ICOMBANDPOWER  | -                                        |
-| ICOM_RIT_Clear      | ICOMRITCLEAR   | Shift-Left or Shift-Delete               | 
-| ICOM_RIT_Minus      | ICOMRITMINUS   | Shift-Up                                 | 
-| ICOM_RIT_Plus       | ICOMRITPLUS    | Shift-Down                               | 
-| ICOM_SO2V           | ICOMSO2V       | ` on english keyboard, § on Scandinavian | 
-| ICOM_Speedsynch     | ICOMSPEED      | -                                        | 
-| ICOM_Waterfall_Mode* | ICOMWFMODE     | Alt-U                                    | 
-| ICOM_Waterfall_Zoom* | ICOMWFZOOM     | Alt-Z                                    | 
+| Script               | Suggested Name | Suggested Key                            |
+|----------------------|----------------|------------------------------------------|
+| ICOM_Bandpower*      | BANDPOWER      | None                                     |
+| ICOM_SO2V            | SO2V           | ` on english keyboard, § on Scandinavian | 
+| ICOM_Speedsynch      | SPEED          | None                                     | 
+| ICOM_Waterfall_Mode* | WFMODE         | Alt-U                                    | 
+| ICOM_Waterfall_Zoom* | WFZOOM         | Alt-Z                                    |
+| ICOM_DVK1            | DVK1           | None. $!DVK1 in scripts                  |
+| ICOM_DVK2            | DVK2           | None. $!DVK2 in scripts                  |
+| ICOM_DVK3            | DVK3           | None. $!DVK3 in scripts                  |
+| ICOM_DVK4            | DVK4           | None. $!DVK4 in scripts                  |
+| ICOM_DVK5            | DVK5           | None. $!DVK5 in scripts                  |
+| ICOM_DVKStop         | DVKStop        | ESC                                      |
+
 
 \* Redundant and should not be enabled if the [ICOMautomagic2](https://github.com/bjornekelund/ICOMautomagic2) utility is used.
 
@@ -60,20 +64,6 @@ The following **Alt keys** are unassigned by default in *DXLog.net*: H, Q, U, X,
 
 The following **Ctrl keys** are unassigned by default in *DXLog.net*: C, H, I, J, K, M, N, O, P, 
 Q, R, U, V, X, and Y.
-
-The choice of **Shift-Up** vs. **Shift-down** is based on personal preferences. 
-Some prefer them to correspond to the up/down movement in the band map, others 
-prefer them to correspond to up/down in pitch. 
-Remember that pitch "direction" depends on whether you use USB or LSB for CW. 
-The proposed key mapping above is consistent with movement in the bandmap, where the 
-frequency increases downwards. 
-
-An very valuable feature in *DXLog.net* is the possibility to invoke scripts 
-from key macros. The syntax is `$!SCRIPTNAME` where `SCRIPTNAME` is the name  
-assigned to the script in the scripts manager. (*Tools->Scripts Manager*)
-It is recommended to use this to reset the RIT in the F1/CQ macro. 
-Simply add `$!ICOMRITCLEAR` to the end of the F1 macro definition. 
-Additionally, some prefer to do this also in the run F3/TU-Log macro. 
 
 ## Scripts description
 
@@ -97,9 +87,9 @@ radio 2 are the same physical radio in SO2V, and the script event is only raised
 changes, it unfortunately can not control the speed of radio 2 in SO2V. 
 For this reason **ICOM_SO2V** instead performs the speed synchronization at focus changes.
 
-**ICOM_RIT_Plus**, **ICOM_RIT_Minus**, and **ICOM_RIT_Clear** Three scripts for 
-RIT (during Run) and frequency (during S&P) adjustment 
-using shifted arrow keys. Plus and minus refers to actual frequency change. 
+**ICOM_DVK...** Scripts for playing the radio's built-in digital voice keyer. 
+DVK1 plays memory 1, DVK memory 2 etc. DVKStop stops the playback and is 
+best mapped to the ESC key.
 
 **ICOM_Bandpower** Per band output power control to avoid overdriving a PA. 
 Typically not used for low power/barefoot operation. Edit the power level table 
@@ -125,4 +115,4 @@ performance may not be completely reliable at 19200bps with frequent polling (< 
 For the most reliable and responsive operation, communication via the USB interface 
 at 115200bps is recommended.
 
-For additional informatin, see the source code or [www.sm7iun.se](https://sm7iun.ekelund.nu/contest/dxlog-net)
+For additional information, see the source code or [www.sm7iun.se](https://sm7iun.ekelund.nu/contest/dxlog-net)
