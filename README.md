@@ -98,7 +98,8 @@ best mapped to the ESC key.
 **ICOM_Bandpower** Per band output power control to avoid overdriving a PA. 
 Typically not used for low power/barefoot operation. Edit the power level table 
 to set safe levels for each band and adjust level manually if required. 
-Only ivoked at band changes. 
+Only invoked at band changes, so manual adjustments are not overwritten 
+until the next band change.
 
 **ICOM_Waterfall_Mode** Automatically sets the edges and reference level of the 
 radio's waterfall/spectrum display based on frequency band and operating mode. 
