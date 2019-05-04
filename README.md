@@ -1,6 +1,6 @@
 # DXLog.net script kit for IC-7610/785x/7300
  
-## NB. Requires DXLog.net 2.3.18 which is currently in beta. Custom ICOM CAT commands is broken in the current stable 2.3.17
+## NB. Requires DXLog.net 2.3.18 which is not yet released.
 
 *These scripts are used entirely at your own risk. Since the scripts control hardware, 
 including things like transmitter output power, they can cause 
