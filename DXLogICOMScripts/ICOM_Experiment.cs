@@ -17,30 +17,47 @@ namespace DXLog.net
         ContestData cdata;
         FrmMain mainForm;
 
+        readonly byte[] IcomSplitOff = { 0x0F, 0x00 };
+        readonly byte[] IcomSplitOn = { 0x0F, 0x01 };
+        static byte[] IcomSetSpeed = new byte[4] { 0x14, 0x0C, 0x00, 0x00 };
+        bool toggleSplit;
+
         public void Initialize(FrmMain main)
         {
             cdata = main.ContestDataProvider;
             mainForm = main;
+            toggleSplit = false;
         }
 
         public void Deinitialize() { }
 
         public void Main(FrmMain main, ContestData cdata, COMMain comMain)
         {
-            int focusedRadio = cdata.FocusedRadio;
-            CATCommon radio1 = comMain.RadioObject(focusedRadio);
-            string message = "Unassigned";
+            CATCommon radio1 = mainForm.COMMainProvider.RadioObject(1);
+            int focusedRadio = mainForm.ContestDataProvider.FocusedRadio;
+            int ICOMspeed;
 
-            message = main.CurrentEntryLine.ActualQSO.Rcvd4;
-            if (message == "")
-                message = cdata.dalMain.ReadQSO(cdata.dalMain.MaxIDQSO()).Rcvd.Split(' ')[1];
+            if (radio1 == null)
+            {
+                mainForm.SetMainStatusText("Experiment: Radio 1 is not available.");
+                return;
+            }
 
-            //message = cdata.dalHeader.CWMessage1;
-            //comMain.SendCWSmart(1, Encoding.ASCII.GetBytes(message));
-            //frmMain._cwKeyer.CWMessageStack.Enqueue(message);
-            mainForm.SendCW(message, focusedRadio, true);
+            //if (toggleSplit)
+            //    radio1.SendCustomCommand(IcomSplitOn);
+            //else
+            //    radio1.SendCustomCommand(IcomSplitOff);
 
-            main.SetMainStatusText(String.Format("Experiment! message = {0}", message));
+            toggleSplit = !toggleSplit;
+
+            // Update keyer speed
+            ICOMspeed = (255 * (mainForm._cwKeyer.CWSpeed(focusedRadio) - 6)) / (48 - 6); // ICOM scales 6-48 WPM onto 0-255
+            IcomSetSpeed[2] = (byte)((ICOMspeed / 100) % 10);
+            IcomSetSpeed[3] = (byte)((((ICOMspeed / 10) % 10) << 4) + (ICOMspeed % 10));
+            radio1.SendCustomCommand(IcomSetSpeed);
+
+            main.SetMainStatusText(String.Format("Experiment: Speed={0} toggleSplit={1}", ICOMspeed, !toggleSplit));
+
         }
     }
 }

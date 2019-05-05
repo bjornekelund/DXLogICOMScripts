@@ -34,6 +34,7 @@ namespace DXLog.net
         static byte[] IcomSetSpeed = new byte[4] { 0x14, 0x0C, 0x00, 0x00 };
 
         bool tempStereoAudio;
+        int lastFocus;
 
         // Executes at DXLog.net start 
         public void Initialize(FrmMain main)
@@ -43,7 +44,8 @@ namespace DXLog.net
             mainForm = main;
 
             // Initialize temporary stereo mode to DXLog's stereo mode to support temporary toggle
-            tempStereoAudio = (mainForm.ListenStatusMode != 0); 
+            tempStereoAudio = (mainForm.ListenStatusMode != 0);
+            lastFocus = 1;
 
             // Only subscribe to event and initialize if radio is ICOM
             if (radio1 != null)
@@ -82,6 +84,7 @@ namespace DXLog.net
                     if (Debug)
                         main.SetMainStatusText(String.Format("IcomSO2V: Focus is Radio #1, Stereo"));
                 }
+
             tempStereoAudio = !tempStereoAudio;
         }
 
@@ -102,9 +105,11 @@ namespace DXLog.net
                 return;
             }
 
-            if (modeIsSo2V) // Only active in SO2V and with ICOM
+            if (modeIsSo2V && focusedRadio != lastFocus) // Only active in SO2V and with ICOM. Ignore false triggers.
             {
                 tempStereoAudio = stereoAudio; // Set temporary stereo mode to DXLog's stereo mode to support temporary toggle
+                lastFocus = focusedRadio;
+
                 if (focusedRadio == 1)
                     radio1.SendCustomCommand(IcomSelectMain);
                 else
@@ -119,7 +124,7 @@ namespace DXLog.net
                 if (stereoAudio || (focusedRadio == 2))
                 {
                     radio1.SendCustomCommand(IcomDualWatchOn);
-                    if (Debug) mainForm.SetMainStatusText(String.Format("IcomSO2V: Listenmode {0}. Focus is Radio #{1}, Dual Watch. Keyer speed = {2}", 
+                    if (Debug) mainForm.SetMainStatusText(String.Format("IcomSO2V: Listenmode {0}. Focus is Radio #{1}, Dual Watch. Keyer speed = {2}",
                         listenMode, focusedRadio, mainForm._cwKeyer.CWSpeed(focusedRadio)));
                 }
                 else
@@ -128,7 +133,6 @@ namespace DXLog.net
                     if (Debug) mainForm.SetMainStatusText(String.Format("IcomSO2V: Listenmode {0}. Focus is Radio #{1}, Main Receiver. Keyer speed = {2}",
                         listenMode, focusedRadio, mainForm._cwKeyer.CWSpeed(focusedRadio)));
                 }
-
             }
         }
     }
