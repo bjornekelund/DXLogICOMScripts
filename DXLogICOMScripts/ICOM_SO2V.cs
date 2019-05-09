@@ -119,7 +119,7 @@ namespace DXLog.net
                 ICOMspeed = (255 * (mainForm._cwKeyer.CWSpeed(focusedRadio) - 6)) / (48 - 6); // ICOM scales 6-48 WPM onto 0-255
                 IcomSetSpeed[2] = (byte)((ICOMspeed / 100) % 10);
                 IcomSetSpeed[3] = (byte)((((ICOMspeed / 10) % 10) << 4) + (ICOMspeed % 10));
-                radio1.SendCustomCommand(IcomSetSpeed);
+                //radio1.SendCustomCommand(IcomSetSpeed);
 
                 if (stereoAudio || (focusedRadio == 2))
                 {

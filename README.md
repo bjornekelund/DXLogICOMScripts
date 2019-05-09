@@ -14,13 +14,12 @@ me or make a pull request.
 Main features are:
 1. Automatic focus shifting for radio's Main VFO knob in SO2V.
 2. Automatic main/sub audio switching in SO2V. (Ctrl-Alt-S or AltGr-S toggles permanent stereo.)
-3. Scripted trigger of radio's internal voice keyer (first five memories).
-4. Automatic per-band output power level for safe PA operation. (Even supports cross-band SO2V if PA band switching is fast.) 
-5. Automatic setting of edges and reference level for the waterfall/spectrum display based on band and operating mode. 
-6. Single-key waterfall/spectrum display zoom. 
+3. Automatic per-band output power level for safe PA operation. (Even supports cross-band SO2V if PA band switching is fast.) 
+4. Automatic setting of edges and reference level for the waterfall/spectrum display based on band and operating mode. 
+5. Single-key waterfall/spectrum display zoom. 
 
 Note that if the utility [Icom Automagic 2](https://github.com/bjornekelund/ICOMautomagic2) is used, 
-items 4-6 are redundant and should not be enabled. 
+items 3-5 are redundant and should not be enabled. 
 
 Minor modifications of the scripts (e.g. changing power levels or band edges) can be 
 done using any source code editor (*notepad++* is a good choice.)
@@ -55,12 +54,6 @@ add the scripts one by one, give them a name and assign a key those that need it
 | ICOM_Speedsynch      | SPEED          | None                                     | 
 | ICOM_Waterfall_Mode* | WFMODE         | Alt-U                                    | 
 | ICOM_Waterfall_Zoom* | WFZOOM         | Alt-Z                                    |
-| ICOM_DVK1            | DVK1           | E.g. F1. $!DVK1 in scripts               |
-| ICOM_DVK2            | DVK2           | E.g. F2. $!DVK2 in scripts               |
-| ICOM_DVK3            | DVK3           | Typically F-key. $!DVK3 in scripts       |
-| ICOM_DVK4            | DVK4           | Typically F-key. $!DVK4 in scripts       |
-| ICOM_DVK5            | DVK5           | Typically F-key. $!DVK5 in scripts       |
-| ICOM_DVKStop         | DVKStop        | ESC                                      |
 
 
 \* Redundant and should not be enabled if the [ICOMautomagic2](https://github.com/bjornekelund/ICOMautomagic2) utility is used.
@@ -91,10 +84,6 @@ Acts silently in the background, needs no key mapping. Works also for SO2R. Sinc
 radio 2 are the same physical radio in SO2V, and the script event is only raised at speed 
 changes, it unfortunately can not control the speed of radio 2 in SO2V. 
 For this reason **ICOM_SO2V** instead performs the speed synchronization at focus changes.
-
-**ICOM_DVK...** Scripts for playing the radio's built-in digital voice keyer. 
-DVK1 plays memory 1, DVK memory 2 etc. DVKStop stops the playback and is 
-best mapped to the ESC key.
 
 **ICOM_Bandpower** Per band output power control to avoid overdriving a PA. 
 Typically not used for low power/barefoot operation. Edit the power level table 
