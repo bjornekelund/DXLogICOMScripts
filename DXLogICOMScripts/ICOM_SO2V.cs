@@ -115,10 +115,12 @@ namespace DXLog.net
                 else
                     radio1.SendCustomCommand(IcomSelectSub);
 
+                // Speed synchronization is currently disabled since it can create audio artifacts wíth the sub receiver 
+                
                 // Update keyer speed
-                ICOMspeed = (255 * (mainForm._cwKeyer.CWSpeed(focusedRadio) - 6)) / (48 - 6); // ICOM scales 6-48 WPM onto 0-255
-                IcomSetSpeed[2] = (byte)((ICOMspeed / 100) % 10);
-                IcomSetSpeed[3] = (byte)((((ICOMspeed / 10) % 10) << 4) + (ICOMspeed % 10));
+                //ICOMspeed = (255 * (mainForm._cwKeyer.CWSpeed(focusedRadio) - 6)) / (48 - 6); // ICOM scales 6-48 WPM onto 0-255
+                //IcomSetSpeed[2] = (byte)((ICOMspeed / 100) % 10);
+                //IcomSetSpeed[3] = (byte)((((ICOMspeed / 10) % 10) << 4) + (ICOMspeed % 10));
                 //radio1.SendCustomCommand(IcomSetSpeed);
 
                 if (stereoAudio || (focusedRadio == 2))
