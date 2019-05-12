@@ -61,7 +61,6 @@ namespace DXLog.net
 
         public void Deinitialize() { } // Do nothing at DXLog.net close down
 
-
         // Toggle dual watch, execution of Main is mapped to a key, typically in upper left corner of keyboard
         public void Main(FrmMain main, ContestData cdata, COMMain comMain)
         {
