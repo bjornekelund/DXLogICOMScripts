@@ -11,8 +11,6 @@
 // does not trigger an event, any change in audio mode will not come 
 // into force until the next focus switch. 
 // Only active for ICOM radio but does not verify radio is SO2V capable
-// Also synchronizes the radio's built-in keyer with the setting 
-// in DXLog. 
 // By Björn Ekelund SM7IUN sm7iun@ssa.se 2019-04-16
 
 using System;
