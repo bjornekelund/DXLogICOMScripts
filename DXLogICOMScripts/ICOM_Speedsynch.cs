@@ -27,6 +27,7 @@ namespace DXLog.net
             CATCommon radio1 = main.COMMainProvider.RadioObject(1);
             cdata = main.ContestDataProvider;
             mainForm = main;
+            lastFocus = 1;
 
             if ((radio1 != null) && (mainForm._cwKeyer != null))
                 if (radio1.IsICOM())
