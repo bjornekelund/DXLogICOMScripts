@@ -44,18 +44,18 @@ namespace DXLog.net
         {
             byte[] IcomSetModeFilter = { 0x26, 0x00, 0x00, 0x00, 0x00};
 
-            cdata = mainForm.ContestDataProvider;
             bool modeIsSO2V = cdata.OPTechnique == 4;
             int focusedRadio = cdata.FocusedRadio;
-            CATCommon radio = mainForm.COMMainProvider.RadioObject(modeIsSO2V ? 1 : focusedRadio);
+            int physicalRadio = modeIsSO2V ? 1 : focusedRadio;
+            CATCommon radio = mainForm.COMMainProvider.RadioObject(physicalRadio);
             int vfo, mode = 0;
 
             if ((radio == null) || (!radio.IsICOM()))
                 return;
 
-            vfo = ((focusedRadio == 1) || ((focusedRadio == 2) && !modeIsSO2V)) ? 0x00 : 0x01;
+            vfo = ((focusedRadio == 2) && modeIsSO2V) ? 0x01 : 0x00;
 
-            // Only works for SSB and CW
+            // Only works for modes listed below 
             switch ((vfo == 0) ? radio.VFOAMode : radio.VFOBMode)
             {
                 case "LSB":
@@ -64,8 +64,17 @@ namespace DXLog.net
                 case "USB":
                     mode = 0x01;
                     break;
+                case "AM":
+                    mode = 0x02;
+                    break;
                 case "CW":
                     mode = 0x03;
+                    break;
+                case "RTTY":
+                    mode = 0x04;
+                    break;
+                case "FM":
+                    mode = 0x05;
                     break;
             }
 
