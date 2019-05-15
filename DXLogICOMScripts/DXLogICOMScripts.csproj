@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="ICOM_Bandpower.cs" />
     <Compile Include="ICOM_Experiment.cs" />
+    <Compile Include="ICOM_Filter.cs" />
     <Compile Include="ICOM_SO2V.cs" />
     <Compile Include="ICOM_Speedsynch.cs" />
     <Compile Include="ICOM_Waterfall_Mode.cs" />

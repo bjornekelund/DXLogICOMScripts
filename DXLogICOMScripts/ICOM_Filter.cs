@@ -1,0 +1,83 @@
+//INCLUDE_ASSEMBLY System.dll
+//INCLUDE_ASSEMBLY System.Windows.Forms.dll
+
+// ICOM 7610 Filter cycling. Typically mapped to Alt-' for 
+// muscle memory compatibility with N1MM. 
+// By Björn Ekelund SM7IUN sm7iun@ssa.se 2019-05-15
+
+using System;
+using IOComm;
+
+namespace DXLog.net
+{
+    public class IcomFilter : ScriptClass
+    {
+        readonly bool Debug = true;
+        ContestData cdata;
+        FrmMain mainForm;
+
+        int currentFilter;
+
+        // Executes at DXLog.net start 
+        public void Initialize(FrmMain main)
+        {
+            cdata = main.ContestDataProvider;
+            mainForm = main;
+
+            currentFilter = 2; // "Middle" filter
+
+            SetIcomFilter(currentFilter);
+        }
+
+        public void Deinitialize() { } // Do nothing at DXLog.net close down
+
+        // Step through filters, Main is mapped to a key, typically not a shifted 
+        // key to allow rapid multiple presses
+        public void Main(FrmMain main, ContestData cdata, COMMain comMain)
+        {
+            currentFilter = (currentFilter % 3) + 1;
+
+            SetIcomFilter(currentFilter);
+        }
+
+        private void SetIcomFilter(int filter)
+        {
+            byte[] IcomSetModeFilter = { 0x26, 0x00, 0x00, 0x00, 0x00};
+
+            cdata = mainForm.ContestDataProvider;
+            bool modeIsSO2V = cdata.OPTechnique == 4;
+            int focusedRadio = cdata.FocusedRadio;
+            CATCommon radio = mainForm.COMMainProvider.RadioObject(modeIsSO2V ? 1 : focusedRadio);
+            int vfo, mode = 0;
+
+            if ((radio == null) || (!radio.IsICOM()))
+                return;
+
+            vfo = ((focusedRadio == 1) || ((focusedRadio == 2) && !modeIsSO2V)) ? 0x00 : 0x01;
+
+            // Only works for SSB and CW
+            switch ((vfo == 0) ? radio.VFOAMode : radio.VFOBMode)
+            {
+                case "LSB":
+                    mode = 0x00;
+                    break;
+                case "USB":
+                    mode = 0x01;
+                    break;
+                case "CW":
+                    mode = 0x03;
+                    break;
+            }
+
+            IcomSetModeFilter[1] = (byte)vfo;
+            IcomSetModeFilter[2] = (byte)mode;
+            IcomSetModeFilter[4] = (byte)filter;
+
+            radio.SendCustomCommand(IcomSetModeFilter);
+
+            if (Debug)
+                mainForm.SetMainStatusText(String.Format("IcomFilter: VFO {0} changed to FIL{1}. Command: [{2}]. ",
+                    (vfo == 0) ? "A" : "B", filter, BitConverter.ToString(IcomSetModeFilter)));
+        }
+    }
+}
