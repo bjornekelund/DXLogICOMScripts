@@ -12,7 +12,7 @@ namespace DXLog.net
 {
     public class IcomFilter : ScriptClass
     {
-        readonly bool Debug = true;
+        readonly bool Debug = false;
         ContestData cdata;
         FrmMain mainForm;
 
@@ -87,6 +87,9 @@ namespace DXLog.net
             if (Debug)
                 mainForm.SetMainStatusText(String.Format("IcomFilter: VFO {0} changed to FIL{1}. Command: [{2}]. ",
                     (vfo == 0) ? "A" : "B", filter, BitConverter.ToString(IcomSetModeFilter)));
+            else
+                mainForm.SetMainStatusText(String.Format("VFO {0} changed to FIL{1}.",
+                    (vfo == 0) ? "A" : "B", filter));
         }
     }
 }

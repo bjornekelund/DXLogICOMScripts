@@ -29,7 +29,8 @@ namespace DXLog.net
         readonly byte[] IcomSelectMain = { 0x07, 0xD0 };
         readonly byte[] IcomSelectSub = { 0x07, 0xD1 };
         readonly byte[] IcomSplitOff = { 0x0F, 0x00 };
-        static byte[] IcomSetSpeed = new byte[4] { 0x14, 0x0C, 0x00, 0x00 };
+        readonly string statusMessage = "Focus on {0} VFO. {1}.";
+
 
         bool tempStereoAudio;
         int lastFocus;
@@ -47,7 +48,7 @@ namespace DXLog.net
 
             // Only subscribe to event and initialize if radio is ICOM
             if (radio1 != null)
-                if (radio1.IsICOM()) { // nesting if since method only valid if radio1 is != null
+                if (radio1.IsICOM()) {
                     cdata.FocusedRadioChanged += new ContestData.FocusedRadioChange(HandleFocusChange);
 
                     // Initialize radio to DW off, Split off and Main VFO focused
@@ -66,23 +67,12 @@ namespace DXLog.net
             CATCommon radio1 = comMain.RadioObject(focusedRadio);
             bool radio1Present = (radio1 != null);
 
-            if ((focusedRadio == 1) && cdata.OPTechnique == 4) // Only active in SO2V
-                if (tempStereoAudio)
-                {
-                    if (radio1Present)
-                        radio1.SendCustomCommand(IcomDualWatchOff);
-                    if (Debug)
-                        main.SetMainStatusText(String.Format("IcomSO2V: Focus is Radio #1, Main Receiver"));
-                }
-            else
-                {
-                    if (radio1Present)
-                        radio1.SendCustomCommand(IcomDualWatchOn);
-                    if (Debug)
-                        main.SetMainStatusText(String.Format("IcomSO2V: Focus is Radio #1, Stereo"));
-                }
-
-            tempStereoAudio = !tempStereoAudio;
+            if (((focusedRadio == 1) && cdata.OPTechnique == 4) && radio1Present)
+            { // If VFO A focused, SO2V and radio present
+                radio1.SendCustomCommand(tempStereoAudio ? IcomDualWatchOff : IcomDualWatchOn);
+                mainForm.SetMainStatusText(String.Format(statusMessage, focusedRadio == 1 ? "Main" : "Sub", tempStereoAudio ? "Main Receiver" : "Dual Watch"));
+                tempStereoAudio = !tempStereoAudio;
+            }
         }
 
         // Event handler invoked when switching between radios (SO2R) or VFO (SO2V) in DXLog.net
@@ -94,6 +84,7 @@ namespace DXLog.net
             int listenMode = mainForm.ListenStatusMode;
             bool stereoAudio = (listenMode != 0);
             bool modeIsSo2V = (mainForm.ContestDataProvider.OPTechnique == 4);
+            string audioStatus;
 
             if (radio1 == null)
             {
@@ -114,15 +105,19 @@ namespace DXLog.net
                 if (stereoAudio || (focusedRadio == 2))
                 {
                     radio1.SendCustomCommand(IcomDualWatchOn);
-                    if (Debug) mainForm.SetMainStatusText(String.Format("IcomSO2V: Listenmode {0}. Focus is Radio #{1}, Dual Watch. Keyer speed = {2}",
-                        listenMode, focusedRadio, mainForm._cwKeyer.CWSpeed(focusedRadio)));
+                    audioStatus = "Dual Watch";
                 }
                 else
                 {
                     radio1.SendCustomCommand(IcomDualWatchOff);
-                    if (Debug) mainForm.SetMainStatusText(String.Format("IcomSO2V: Listenmode {0}. Focus is Radio #{1}, Main Receiver. Keyer speed = {2}",
-                        listenMode, focusedRadio, mainForm._cwKeyer.CWSpeed(focusedRadio)));
+                    audioStatus = "Main Receiver";
                 }
+
+                if (Debug) mainForm.SetMainStatusText(String.Format("IcomSO2V: Listenmode {0}. Focus is Radio #{1}, {2}.",
+                    listenMode, focusedRadio, audioStatus));
+                else
+                    mainForm.SetMainStatusText(String.Format(statusMessage, focusedRadio == 1 ? "Main" : "Sub", audioStatus));
+
             }
         }
     }
