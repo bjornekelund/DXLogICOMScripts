@@ -31,6 +31,7 @@ namespace DXLog.net
         readonly byte[] IcomSplitOff = { 0x0F, 0x00 };
         readonly string statusMessage = "Focus on {0} VFO. {1}.";
 
+        delegate void HandleListenStatusChangeCB(int newMode);
 
         bool tempStereoAudio;
         int lastFocus;
@@ -50,6 +51,7 @@ namespace DXLog.net
             if (radio1 != null)
                 if (radio1.IsICOM()) {
                     cdata.FocusedRadioChanged += new ContestData.FocusedRadioChange(HandleFocusChange);
+//                    main.COMMainProvider.ListenStatusChanged += new COMMain.ListenStatusChangedCB(HandleListenChange);
 
                     // Initialize radio to DW off, Split off and Main VFO focused
                     radio1.SendCustomCommand(IcomDualWatchOff); 
@@ -58,7 +60,7 @@ namespace DXLog.net
                 }
         }
 
-        public void Deinitialize() { } // Do nothing at DXLog.net close down
+        public void Deinitialize() { } 
 
         // Toggle dual watch, execution of Main is mapped to a key, typically in upper left corner of keyboard
         public void Main(FrmMain main, ContestData cdata, COMMain comMain)
@@ -74,6 +76,11 @@ namespace DXLog.net
                 tempStereoAudio = !tempStereoAudio;
             }
         }
+
+        //private void HandleListenChange(int listenMode)
+        //{
+        //    mainForm.SetMainStatusText(String.Format("ListenMode {0}", listenMode));
+        //}
 
         // Event handler invoked when switching between radios (SO2R) or VFO (SO2V) in DXLog.net
         private void HandleFocusChange()
