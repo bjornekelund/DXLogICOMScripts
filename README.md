@@ -54,6 +54,7 @@ add the scripts one by one, give them a name and assign a key those that need it
 | ICOM_Speedsynch      | SPEED          | None                                     | 
 | ICOM_Waterfall_Mode* | WFMODE         | Alt-U                                    | 
 | ICOM_Waterfall_Zoom* | WFZOOM         | Alt-Z                                    |
+| ICOM_Filter          | FILTER         | ' or Alt-'                               |
 
 
 \* Redundant and should not be enabled if the [ICOMautomagic2](https://github.com/bjornekelund/ICOMautomagic2) utility is used.
@@ -80,10 +81,12 @@ using the key mapped to the script. To manage weak or hard to copy stations on S
 press the main receiver's AF gain knob to temporarily mute it. 
 
 **ICOM_Speedsynch** Synchronizes the radio's internal keyer with *DXLog.net's* speed setting.
-Acts silently in the background, needs no key mapping. Works also for SO2R. Since radio 1 and 
-radio 2 are the same physical radio in SO2V, and the script event is only raised at speed 
-changes, it unfortunately can not control the speed of radio 2 in SO2V. 
-For this reason **ICOM_SO2V** instead performs the speed synchronization at focus changes.
+Acts silently in the background, needs no key mapping. Works for all operating techniques. 
+By using both the speed change and focus change events it works also for SO2V where the 
+two logical radios are the same physical radio. 
+
+**ICOM_Filter** Cycles through the three filter settings, one step per invokation. 
+Works for all operating techniques. 
 
 **ICOM_Bandpower** Per band output power control to avoid overdriving a PA. 
 Typically not used for low power/barefoot operation. Edit the power level table 
