@@ -48,7 +48,7 @@ namespace DXLog.net
         private void HandleCWSpeedChange(int radioNumber, int newSpeed)
         {
             CATCommon radioObject;
-            bool modeIsSO2V = (mainForm.ContestDataProvider.OPTechnique == 4);
+            bool modeIsSO2V = (mainForm.ContestDataProvider.OPTechnique == ContestData.Technique.SO2V);
             int physicalRadio, ICOMspeed;
 
             // If SO2V, physical radio is always #1
@@ -79,7 +79,7 @@ namespace DXLog.net
         {
             CATCommon radio1 = mainForm.COMMainProvider.RadioObject(1);
             int focusedRadio = mainForm.ContestDataProvider.FocusedRadio;
-            bool modeIsSo2V = (mainForm.ContestDataProvider.OPTechnique == 4);
+            bool modeIsSo2V = (mainForm.ContestDataProvider.OPTechnique == ContestData.Technique.SO2V);
 
             if (radio1 == null)
             {

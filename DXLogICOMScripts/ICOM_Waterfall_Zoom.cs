@@ -83,10 +83,10 @@ namespace DXLog.net
             int RadioNumber = cdata.FocusedRadio;
 
             // Radio index is radio number - 1 for SO2R, otherwise 0 which represents radio 1
-            int usedRadioIndex = ((cdata.OPTechnique == 1) || (cdata.OPTechnique == 2)) ? RadioNumber - 1 : 0;
+            int usedRadioIndex = ((cdata.OPTechnique == ContestData.Technique.SO2R) || (cdata.OPTechnique == ContestData.Technique.SO2R_ADV)) ? RadioNumber - 1 : 0;
 
             // If on VFO B in SO2V, do nothing and return
-            if ((cdata.OPTechnique == 4) && (RadioNumber == 2)) 
+            if ((cdata.OPTechnique == ContestData.Technique.SO2V) && (RadioNumber == 2)) 
             return;
 
             // If not waterfall capable, do nothing and return

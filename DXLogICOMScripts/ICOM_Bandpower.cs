@@ -100,7 +100,7 @@ namespace DXLog.net
             // The second event for radio 2 confuses the logic in SO2V. 
             // Since it is called last, it sets the power level on radio 1 using 
             // the band of VFO B, in spite of VFO A being selected in DXLog. 
-            if (cdata.OPTechnique == 4)
+            if (cdata.OPTechnique == ContestData.Technique.SO2V)
             {
                 EventCount = (EventCount < 3) ? EventCount + 1 : 3;
                 if (EventCount == 2)  
@@ -108,7 +108,7 @@ namespace DXLog.net
             }
 
             // usedRadio index is radio number - 1 for SO2R, otherwise 0 which represents radio 1
-            int usedRadioIndex = ((cdata.OPTechnique == 1) || (cdata.OPTechnique == 2)) ? RadioNumber - 1 : 0;
+            int usedRadioIndex = ((cdata.OPTechnique == ContestData.Technique.SO2R) || (cdata.OPTechnique == ContestData.Technique.SO2R_ADV)) ? RadioNumber - 1 : 0;
 
             usedRadio = mainForm.COMMainProvider.RadioObject(usedRadioIndex + 1);
 
@@ -123,7 +123,7 @@ namespace DXLog.net
 
             if ((RadioNumber == 1) || (RadioNumber == 2)) // If a regular band change 
             {
-                if ((cdata.OPTechnique == 4) && (RadioNumber == 2)) // In SO2V, logical radio 2 is physical radio 1 VFO B
+                if ((cdata.OPTechnique == ContestData.Technique.SO2V) && (RadioNumber == 2)) // In SO2V, logical radio 2 is physical radio 1 VFO B
                     megaHertz = (int)(usedRadio.VFOBFrequency / 1000.0);
                 else
                     megaHertz = (int)(usedRadio.VFOAFrequency / 1000.0);
@@ -152,7 +152,7 @@ namespace DXLog.net
             // Only act if SO2V. No need to verify radio as ICOM since handler is
             // not active otherwise. In SO2V only physical radio 1 is used. 
             // Logical radio 1 is VFO A, logical radio 2 is VFO B
-            if (cdata.OPTechnique == 4) 
+            if (cdata.OPTechnique == ContestData.Technique.SO2V) 
             {
                 usedRadio = mainForm.COMMainProvider.RadioObject(1);
 

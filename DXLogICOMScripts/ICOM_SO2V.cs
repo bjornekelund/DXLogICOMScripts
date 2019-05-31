@@ -69,7 +69,7 @@ namespace DXLog.net
             CATCommon radio1 = comMain.RadioObject(focusedRadio);
             bool radio1Present = (radio1 != null);
 
-            if (((focusedRadio == 1) && cdata.OPTechnique == 4) && radio1Present)
+            if (((focusedRadio == 1) && cdata.OPTechnique == ContestData.Technique.SO2V) && radio1Present)
             { // If VFO A focused, SO2V and radio present
                 radio1.SendCustomCommand(tempStereoAudio ? IcomDualWatchOff : IcomDualWatchOn);
                 mainForm.SetMainStatusText(String.Format(statusMessage, focusedRadio == 1 ? "Main" : "Sub", tempStereoAudio ? "Main Receiver" : "Dual Watch"));
@@ -90,7 +90,7 @@ namespace DXLog.net
             // ListenStatusMode: 0=Radio 1, 1=Radio 2 toggle, 2=Radio 2, 3=Both
             int listenMode = mainForm.ListenStatusMode;
             bool stereoAudio = (listenMode != 0);
-            bool modeIsSo2V = (mainForm.ContestDataProvider.OPTechnique == 4);
+            bool modeIsSo2V = (mainForm.ContestDataProvider.OPTechnique == ContestData.Technique.);
             string audioStatus;
 
             if (radio1 == null)
