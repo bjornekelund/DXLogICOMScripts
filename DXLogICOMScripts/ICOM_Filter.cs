@@ -44,7 +44,7 @@ namespace DXLog.net
         {
             byte[] IcomSetModeFilter = { 0x26, 0x00, 0x00, 0x00, 0x00};
 
-            bool modeIsSO2V = cdata.OPTechnique == 4;
+            bool modeIsSO2V = cdata.OPTechnique == ContestData.Technique.SO2V;
             int focusedRadio = cdata.FocusedRadio;
             int physicalRadio = modeIsSO2V ? 1 : focusedRadio;
             CATCommon radio = mainForm.COMMainProvider.RadioObject(physicalRadio);
