@@ -90,7 +90,7 @@ namespace DXLog.net
             // ListenStatusMode: 0=Radio 1, 1=Radio 2 toggle, 2=Radio 2, 3=Both
             int listenMode = mainForm.ListenStatusMode;
             bool stereoAudio = (listenMode != 0);
-            bool modeIsSo2V = (mainForm.ContestDataProvider.OPTechnique == ContestData.Technique.);
+            bool modeIsSo2V = (mainForm.ContestDataProvider.OPTechnique == ContestData.Technique.SO2V);
             string audioStatus;
 
             if (radio1 == null)
