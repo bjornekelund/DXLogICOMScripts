@@ -56,7 +56,8 @@ namespace DXLog.net
             IcomSetSpeed[3] = (byte)((((ICOMspeed / 10) % 10) << 4) + (ICOMspeed % 10));
             radio1.SendCustomCommand(IcomSetSpeed);
 
-            main.SetMainStatusText(String.Format("Experiment: Speed={0} toggleSplit={1}", ICOMspeed, !toggleSplit));
+            //main.SetMainStatusText(String.Format("Experiment: Speed={0} toggleSplit={1}", ICOMspeed, !toggleSplit));
+            main.SetMainStatusText(String.Format("Experiment: Callsign = {0}", mainForm.CurrentEntryLine.ActualQSO.Callsign));
 
         }
     }

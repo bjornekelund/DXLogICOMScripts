@@ -42,7 +42,8 @@ namespace DXLog.net
 
         private void SetIcomFilter(int filter)
         {
-            byte[] IcomSetModeFilter = { 0x26, 0x00, 0x00, 0x00, 0x00};
+            byte[] IcomSetModeFilter = { 0x26, 0x00, 0x00, 0x00, 0x00 };
+            byte[] IcomDisableAPF = { 0x16, 0x32, 0x00 };
 
             bool modeIsSO2V = cdata.OPTechnique == ContestData.Technique.SO2V;
             int focusedRadio = cdata.FocusedRadio;
@@ -82,6 +83,7 @@ namespace DXLog.net
             IcomSetModeFilter[2] = (byte)mode;
             IcomSetModeFilter[4] = (byte)filter;
 
+            radio.SendCustomCommand(IcomDisableAPF);
             radio.SendCustomCommand(IcomSetModeFilter);
 
             if (Debug)
