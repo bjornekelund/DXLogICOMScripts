@@ -13,7 +13,7 @@ me or make a pull request.
 
 Main features are:
 1. Automatic focus shifting for radio's Main VFO knob in SO2V.
-2. Automatic main/sub audio switching in SO2V. (Ctrl-Alt-S or AltGr-S toggles permanent stereo.)
+2. Automatic main/sub audio switching in SO2V. (Ctrl-Alt-S or AltGr-S toggles permanent stereo on/off.)
 3. Automatic per-band output power level for safe PA operation. (Even supports cross-band SO2V if PA band switching is fast.) 
 4. Automatic setting of edges and reference level for the waterfall/spectrum display based on band and operating mode. 
 5. Single-key waterfall/spectrum display zoom. 
@@ -49,12 +49,13 @@ add the scripts one by one, give them a name and assign a key those that need it
 
 | Script               | Suggested Name | Suggested Key                            |
 |----------------------|----------------|------------------------------------------|
-| ICOM_Bandpower*      | BANDPOWER      | None                                     |
 | ICOM_SO2V            | SO2V           | ` on english keyboard, § on Scandinavian | 
+| ICOM_SO2V_DW         | TOGGLEDWH      | Ctrl-Alt-S                               |  
 | ICOM_Speedsynch      | SPEED          | None                                     | 
+| ICOM_Filter          | FILTER         | ' or Alt-'                               |
+| ICOM_Bandpower*      | BANDPOWER      | None                                     |
 | ICOM_Waterfall_Mode* | WFMODE         | Alt-U                                    | 
 | ICOM_Waterfall_Zoom* | WFZOOM         | Alt-Z                                    |
-| ICOM_Filter          | FILTER         | ' or Alt-'                               |
 
 
 \* Redundant and should not be enabled if the [ICOMautomagic2](https://github.com/bjornekelund/ICOMautomagic2) utility is used.
@@ -71,7 +72,7 @@ with ICOM IC-7610. It has not been tested but believed to be working also for IC
 7850 and 7851. (All feedback is welcome.) In "Normal listening mode", selecting the 
 main VFO ("radio 1" in SO2V) will result in the main receiver in both ears. 
 Selecting the sub VFO ("radio 2") will result in the main receiver in the left ear 
-and the sub receiver in the right ear. In "stereo" mode (toggled with Ctrl-Alt-S 
+and the sub receiver in the right ear. In "permanent stereo" mode (toggled with Ctrl-Alt-S 
 or AltGr-S) the main receiver will always be in the left ear and the sub receiver 
 in the right ear, independent of focus. Since it is not possible to listen to only 
 the sub receiver, it is recommended to Run on the main VFO and S&P on the sub VFO. 
@@ -79,6 +80,10 @@ To help with weak stations answering on Run, or to check a station you are waiti
 to work on radio 2, you can temporarily toggle between stereo and only main receiver 
 using the key mapped to the script. To manage weak or hard to copy stations on S&P, 
 press the main receiver's AF gain knob to temporarily mute it. 
+
+**ICOM_SO2V_DW** Toggles "permanent stereo" on and off. Executes both the script 
+(to immediately force dual watch on and off on the radio) and DLog.net's built-in 
+to toggle audio mode. Does nothing if radio 1 not is selected.
 
 **ICOM_Speedsynch** Synchronizes the radio's internal keyer with *DXLog.net's* speed setting.
 Acts silently in the background, needs no key mapping. Works for all operating techniques. 

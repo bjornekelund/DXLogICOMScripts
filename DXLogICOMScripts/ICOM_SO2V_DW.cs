@@ -48,7 +48,7 @@ namespace DXLog.net
                 if (radio1Present && modeIsSo2V)
                     if (radio1.IsICOM())
                         radio1.SendCustomCommand(stereoAudio ? IcomDualWatchOff : IcomDualWatchOn);
-                //mainForm.ContinueScript = true;
+                //mainForm.ScriptContinue = true;
             }
 
         }
