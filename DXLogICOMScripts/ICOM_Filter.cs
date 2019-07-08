@@ -3,7 +3,7 @@
 
 // ICOM 7610 Filter cycling. Typically mapped to Alt-' for 
 // muscle memory compatibility with N1MM. 
-// By Björn Ekelund SM7IUN sm7iun@ssa.se 2019-05-15
+// By Björn Ekelund SM7IUN sm7iun@ssa.se 2019-07-08
 
 using System;
 using IOComm;
@@ -35,19 +35,15 @@ namespace DXLog.net
 
         private void SetIcomFilter(int filter, FrmMain main)
         {
-            byte[] IcomSetModeFilter = { 0x26, 0x00, 0x00, 0x00, 0x00 };
-            byte[] IcomDisableAPF = { 0x16, 0x32, 0x00 };
 
             bool modeIsSO2V = main.ContestDataProvider.OPTechnique == ContestData.Technique.SO2V;
             int focusedRadio = main.ContestDataProvider.FocusedRadio;
             int physicalRadio = modeIsSO2V ? 1 : focusedRadio;
             CATCommon radio = main.COMMainProvider.RadioObject(physicalRadio);
-            int vfo, mode = 0;
+            byte vfo, mode = 0;
 
-            if ((radio == null) || (!radio.IsICOM()))
+            if (radio == null || !radio.IsICOM())
                 return;
-
-            vfo = ((focusedRadio == 2) && modeIsSO2V) ? 0x01 : 0x00;
 
             // Only works for modes listed below 
             switch ((vfo == 0) ? radio.VFOAMode : radio.VFOBMode)
@@ -72,9 +68,10 @@ namespace DXLog.net
                     break;
             }
 
-            IcomSetModeFilter[1] = (byte)vfo;
-            IcomSetModeFilter[2] = (byte)mode;
-            IcomSetModeFilter[4] = (byte)filter;
+            vfo = (byte)(((focusedRadio == 2) && modeIsSO2V) ? 0x01 : 0x00);
+
+            byte[] IcomSetModeFilter = { 0x26, vfo, mode, 0x00, (byte)filter };
+            byte[] IcomDisableAPF = { 0x16, 0x32, 0x00 };
 
             radio.SendCustomCommand(IcomDisableAPF);
             radio.SendCustomCommand(IcomSetModeFilter);
