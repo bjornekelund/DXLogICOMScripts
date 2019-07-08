@@ -59,7 +59,7 @@
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DXLog.net\DXLComm.dll</HintPath>
     </Reference>
     <Reference Include="DXLog.net">
-      <HintPath>..\..\..\..\..\source\repos\DXLog.net\DXLog.net\bin\Release\DXLog.net.exe</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DXLog.net\DXLog.net.exe</HintPath>
     </Reference>
     <Reference Include="DXLog.net.COM">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DXLog.net\DXLog.net.COM.dll</HintPath>

@@ -13,20 +13,14 @@ namespace DXLog.net
     public class IcomFilter : ScriptClass
     {
         readonly bool Debug = false;
-        ContestData cdata;
-        FrmMain mainForm;
 
         int currentFilter;
 
         // Executes at DXLog.net start 
         public void Initialize(FrmMain main)
         {
-            cdata = main.ContestDataProvider;
-            mainForm = main;
-
             currentFilter = 2; // "Middle" filter
-
-            SetIcomFilter(currentFilter);
+            SetIcomFilter(currentFilter, main);
         }
 
         public void Deinitialize() { } // Do nothing at DXLog.net close down
@@ -36,19 +30,18 @@ namespace DXLog.net
         public void Main(FrmMain main, ContestData cdata, COMMain comMain)
         {
             currentFilter = (currentFilter % 3) + 1;
-
-            SetIcomFilter(currentFilter);
+            SetIcomFilter(currentFilter, main);
         }
 
-        private void SetIcomFilter(int filter)
+        private void SetIcomFilter(int filter, FrmMain main)
         {
             byte[] IcomSetModeFilter = { 0x26, 0x00, 0x00, 0x00, 0x00 };
             byte[] IcomDisableAPF = { 0x16, 0x32, 0x00 };
 
-            bool modeIsSO2V = cdata.OPTechnique == ContestData.Technique.SO2V;
-            int focusedRadio = cdata.FocusedRadio;
+            bool modeIsSO2V = main.ContestDataProvider.OPTechnique == ContestData.Technique.SO2V;
+            int focusedRadio = main.ContestDataProvider.FocusedRadio;
             int physicalRadio = modeIsSO2V ? 1 : focusedRadio;
-            CATCommon radio = mainForm.COMMainProvider.RadioObject(physicalRadio);
+            CATCommon radio = main.COMMainProvider.RadioObject(physicalRadio);
             int vfo, mode = 0;
 
             if ((radio == null) || (!radio.IsICOM()))
@@ -87,10 +80,10 @@ namespace DXLog.net
             radio.SendCustomCommand(IcomSetModeFilter);
 
             if (Debug)
-                mainForm.SetMainStatusText(String.Format("IcomFilter: VFO {0} changed to FIL{1}. Command: [{2}]. ",
+                main.SetMainStatusText(String.Format("IcomFilter: VFO {0} changed to FIL{1}. Command: [{2}]. ",
                     (vfo == 0) ? "A" : "B", filter, BitConverter.ToString(IcomSetModeFilter)));
             else
-                mainForm.SetMainStatusText(String.Format("VFO {0} changed to FIL{1}.",
+                main.SetMainStatusText(String.Format("VFO {0} changed to FIL{1}.",
                     (vfo == 0) ? "A" : "B", filter));
         }
     }
