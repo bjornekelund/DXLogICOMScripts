@@ -45,6 +45,8 @@ namespace DXLog.net
             if (radio == null || !radio.IsICOM())
                 return;
 
+            vfo = (byte)(((focusedRadio == 2) && modeIsSO2V) ? 0x01 : 0x00);
+
             // Only works for modes listed below 
             switch ((vfo == 0) ? radio.VFOAMode : radio.VFOBMode)
             {
@@ -67,8 +69,6 @@ namespace DXLog.net
                     mode = 0x05;
                     break;
             }
-
-            vfo = (byte)(((focusedRadio == 2) && modeIsSO2V) ? 0x01 : 0x00);
 
             byte[] IcomSetModeFilter = { 0x26, vfo, mode, 0x00, (byte)filter };
             byte[] IcomDisableAPF = { 0x16, 0x32, 0x00 };
