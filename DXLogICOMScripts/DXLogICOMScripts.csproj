@@ -64,9 +64,6 @@
     <Reference Include="DXLog.net.COM">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DXLog.net\DXLog.net.COM.dll</HintPath>
     </Reference>
-    <Reference Include="DXLogCalculators">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DXLog.net\DXLogCalculators.dll</HintPath>
-    </Reference>
     <Reference Include="DXLogDAL">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DXLog.net\DXLogDAL.dll</HintPath>
     </Reference>
