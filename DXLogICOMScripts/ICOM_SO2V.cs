@@ -79,13 +79,12 @@ namespace DXLog.net
 
         // Event handler invoked when switching between radios (SO2R) or VFO (SO2V) in DXLog.net
 
-        private void HandleFocusChange()
+        void HandleFocusChange()
         {
             CATCommon radio1 = mainForm.COMMainProvider.RadioObject(1);
             int focusedRadio = mainForm.ContestDataProvider.FocusedRadio;
             // ListenStatusMode: 0=Radio 1, 1=Radio 2 toggle, 2=Radio 2, 3=Both
-            int listenMode = mainForm.ListenStatusMode;
-            bool stereoAudio = (listenMode != 0);
+            bool stereoAudio = (mainForm.ListenStatusMode == COMMain.ListenMode.R1R2);
             bool modeIsSo2V = (mainForm.ContestDataProvider.OPTechnique == ContestData.Technique.SO2V);
             bool radio1Present = radio1 != null;
 
@@ -101,7 +100,7 @@ namespace DXLog.net
                 }
 
                 if (Debug) mainForm.SetMainStatusText(String.Format("IcomSO2V: Listenmode {0}. Focus is Radio #{1}",
-                    listenMode, focusedRadio));
+                    mainForm.ListenStatusMode, focusedRadio));
                 else
                     mainForm.SetMainStatusText("Focus on " + ((focusedRadio == 1) ? "main" : "sub") + " VFO. " +
                         (stereoAudio || (focusedRadio == 2) ? "Both receivers" : "Main receiver only"));
