@@ -11,9 +11,8 @@
 // does not trigger an event, any change in audio mode will not come 
 // into force until the next focus switch. 
 // Only active for ICOM radio but does not verify radio is SO2V capable
-// By Björn Ekelund SM7IUN sm7iun@ssa.se 2019-07-08
+// By Björn Ekelund SM7IUN sm7iun@ssa.se 2019-09-19
 
-using System;
 using IOComm;
 
 namespace DXLog.net
@@ -35,7 +34,6 @@ namespace DXLog.net
         int lastFocus;
 
         // Executes at DXLog.net start 
-
         public void Initialize(FrmMain main)
         {
             CATCommon radio1 = main.COMMainProvider.RadioObject(1);
@@ -66,7 +64,6 @@ namespace DXLog.net
         public void Deinitialize() { }
 
         // Toggle dual watch when radio 1 is focused in SO2V. Typically mapped to a key in upper left corner of keyboard.
-
         public void Main(FrmMain main, ContestData cdata, COMMain comMain)
         {
             int focusedRadio = cdata.FocusedRadio;
@@ -92,7 +89,8 @@ namespace DXLog.net
 
             if (focusedRadio != lastFocus) // Only active in SO2V and with ICOM. Ignore false invokes.
             {
-                tempStereoAudio = stereoAudio; // Set temporary stereo mode to DXLog's stereo mode to support temporary toggle
+                // Set temporary stereo mode to DXLog's stereo mode to support temporary toggle
+                tempStereoAudio = stereoAudio; 
                 lastFocus = focusedRadio;
 
                 if (radio1Present)
