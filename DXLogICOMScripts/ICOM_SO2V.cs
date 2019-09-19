@@ -40,22 +40,27 @@ namespace DXLog.net
         {
             CATCommon radio1 = main.COMMainProvider.RadioObject(1);
             mainForm = main;
+            bool modeIsSo2V = (mainForm.ContestDataProvider.OPTechnique == ContestData.Technique.SO2V);
 
-            // Initialize temporary stereo mode to DXLog's stereo mode to support temporary toggle
-            // At start up, radio 1 is always focused and stereo audio is disabled
-            tempStereoAudio = (mainForm.ListenStatusMode != 0);
-            lastFocus = 1;
+            if (modeIsSo2V)
+            {
+                // Initialize temporary stereo mode to DXLog's stereo mode to support temporary toggle
+                // At start up, radio 1 is always focused and stereo audio is disabled
+                tempStereoAudio = false;
+                lastFocus = 1;
 
-            // Only initialize radio if present and ICOM 
-            main.ContestDataProvider.FocusedRadioChanged += new ContestData.FocusedRadioChange(HandleFocusChange);
+                main.ContestDataProvider.FocusedRadioChanged += new ContestData.FocusedRadioChange(HandleFocusChange);
 
-            if (radio1 != null)
-                if (radio1.IsICOM()) {
-                    // Initialize radio to DW off, Split off and Main VFO focused
-                    radio1.SendCustomCommand(IcomDualWatchOff); 
-                    radio1.SendCustomCommand(IcomSelectMain);
-                    radio1.SendCustomCommand(IcomSplitOff);
-                }
+                // Only initialize radio if present and ICOM 
+                if (radio1 != null)
+                    if (radio1.IsICOM())
+                    {
+                        // Initialize radio to DW off, Split off and Main VFO focused
+                        radio1.SendCustomCommand(IcomDualWatchOff);
+                        radio1.SendCustomCommand(IcomSelectMain);
+                        radio1.SendCustomCommand(IcomSplitOff);
+                    }
+            }
         }
 
         public void Deinitialize() { }
@@ -77,18 +82,15 @@ namespace DXLog.net
             }
         }
 
-        // Event handler invoked when switching between radios (SO2R) or VFO (SO2V) in DXLog.net
-
+        // Event handler invoked when switching between VFO (SO2V) in DXLog.net
         void HandleFocusChange()
         {
             CATCommon radio1 = mainForm.COMMainProvider.RadioObject(1);
             int focusedRadio = mainForm.ContestDataProvider.FocusedRadio;
-            // ListenStatusMode: 0=Radio 1, 1=Radio 2 toggle, 2=Radio 2, 3=Both
-            bool stereoAudio = (mainForm.ListenStatusMode == COMMain.ListenMode.R1R2);
-            bool modeIsSo2V = (mainForm.ContestDataProvider.OPTechnique == ContestData.Technique.SO2V);
+            bool stereoAudio = mainForm.ListenStatusMode == COMMain.ListenMode.R1R2;
             bool radio1Present = radio1 != null;
 
-            if (modeIsSo2V && focusedRadio != lastFocus) // Only active in SO2V and with ICOM. Ignore false invokes.
+            if (focusedRadio != lastFocus) // Only active in SO2V and with ICOM. Ignore false invokes.
             {
                 tempStereoAudio = stereoAudio; // Set temporary stereo mode to DXLog's stereo mode to support temporary toggle
                 lastFocus = focusedRadio;
@@ -99,7 +101,7 @@ namespace DXLog.net
                     radio1.SendCustomCommand(stereoAudio || (focusedRadio == 2) ? IcomDualWatchOn : IcomDualWatchOff);
                 }
 
-                if (Debug) mainForm.SetMainStatusText(String.Format("IcomSO2V: Listenmode {0}. Focus is Radio #{1}",
+                if (Debug) mainForm.SetMainStatusText(string.Format("IcomSO2V: Listenmode {0}. Focus is Radio #{1}",
                     mainForm.ListenStatusMode, focusedRadio));
                 else
                     mainForm.SetMainStatusText("Focus on " + ((focusedRadio == 1) ? "main" : "sub") + " VFO. " +

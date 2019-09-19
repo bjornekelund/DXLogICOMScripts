@@ -7,14 +7,13 @@
 // Only active for ICOM radio but does not verify radio is SO2V capable
 // By Björn Ekelund SM7IUN sm7iun@ssa.se 2019-07-08
 
-using System;
 using IOComm;
 
 namespace DXLog.net
 {
     public class IcomSO2VDW : ScriptClass
     {
-        readonly bool Debug = false;
+        //readonly bool Debug = false;
 
         readonly byte[] IcomDualWatchOn = { 0x07, 0xC1 };
         readonly byte[] IcomDualWatchOff = { 0x07, 0xC0 };
@@ -29,7 +28,7 @@ namespace DXLog.net
             CATCommon radio1 = comMain.RadioObject(1);
             int focusedRadio = cdata.FocusedRadio;
             // ListenStatusMode: 0=Radio 1, 1=Radio 2 toggle, 2=Radio 2, 3=Both
-            bool stereoAudio = (main.ListenStatusMode != 0);
+            bool stereoAudio = (main.ListenStatusMode == COMMain.ListenMode.R1R2);
             bool modeIsSo2V = (cdata.OPTechnique == ContestData.Technique.SO2V);
             bool radio1Present = (radio1 != null);
 
