@@ -1,6 +1,4 @@
 # DXLog.net script kit for IC-7610/785x/7300
- 
-## NB. Requires DXLog.net 2.3.18 which is not yet released.
 
 *These scripts are used entirely at your own risk. Since the scripts control hardware, 
 including things like transmitter output power, they can cause 
@@ -18,7 +16,7 @@ Main features are:
 4. Automatic setting of edges and reference level for the waterfall/spectrum display based on band and operating mode. 
 5. Single-key waterfall/spectrum display zoom. 
 
-Note that if the utility [Icom Automagic 2](https://github.com/bjornekelund/ICOMautomagic2) is used, 
+Note that if the utility [Icom Automagic](https://github.com/bjornekelund/ICOMautomagic) is used, 
 items 3-5 are redundant and should not be enabled. 
 
 Minor modifications of the scripts (e.g. changing power levels or band edges) can be 
@@ -58,7 +56,7 @@ add the scripts one by one, give them a name and assign a key those that need it
 | ICOM_Waterfall_Zoom* | WFZOOM         | Alt-Z                                    |
 
 
-\* Redundant and should not be enabled if the [ICOMautomagic2](https://github.com/bjornekelund/ICOMautomagic2) utility is used.
+\* Redundant and should not be enabled if the [ICOMautomagic](https://github.com/bjornekelund/ICOMautomagic) utility is used.
 
 The following **Alt keys** are unassigned by default in *DXLog.net*: H, Q, U, X, and Z.
 
@@ -118,4 +116,4 @@ performance may not be completely reliable at 19200bps with frequent polling (< 
 For the most reliable and responsive operation, communication via the USB interface 
 at 115200bps is recommended.
 
-For additional information, see the source code or [www.sm7iun.se](https://sm7iun.ekelund.nu/contest/dxlog-net)
+For additional information, see the source code or [www.sm7iun.se](https://sm7iun.se/contesting/dxlog-net/)
