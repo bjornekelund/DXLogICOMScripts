@@ -5,9 +5,9 @@ including things like transmitter output power, they can cause
 hardware damage due to latent software defects or if wrongly configured or used.*
 
 This is a script kit designed for enhancing [DXLog.net](http://dxlog.net) SO2V contest operation with
-ICOM IC-7610 and IC-78xx but it also contains functions useful for IC-7300. It is only verified on 
-IC-7610 and IC-7300. Should you find any anomalies or defects when used with other radios, please email
-me or make a pull request.
+ICOM IC-7610 and IC-78xx but it also contains functions useful for IC-7300, IC-7600 and IC-7700. 
+It is only verified on IC-7610 and IC-7300. Should you find any anomalies or defects when used with 
+other radios, please email me or make a pull request.
 
 Main features are:
 1. Automatic focus shifting for radio's Main VFO knob in SO2V.
@@ -25,11 +25,11 @@ Any more sophisticated modification and/or extension of the scripts will greatly
 benefit from using Visual Studio. The [community](https://visualstudio.microsoft.com/downloads)
 version is free of charge for individuals and open-source contributors. 
 
-Since the debugging facilities within *DXLog.net* are very limited, a more 
-advanced SDK like Visual Studio is a great help.
+Since the debugging facilities within *DXLog.net* are very limited, a more advanced SDK like Visual 
+Studio is a great help.
 The script kit is formatted for use in Visual Studio. Once cloned or 
 downloaded/decompressed, just double-click on the file `DXLogICOMScripts.sln` 
-to open the kit in Visual Studio.
+to open the script kit in Visual Studio.
 
 If the editor complains about syntax/usage (red wavy lines) make sure you have 
 references to the *DXLog.net* `DLL` and `EXE` files correctly set up. 
@@ -80,7 +80,7 @@ using the key mapped to the script. To manage weak or hard to copy stations on S
 press the main receiver's AF gain knob to temporarily mute it. 
 
 **ICOM_SO2V_DW** Toggles "permanent stereo" on and off. Executes both the script 
-(to immediately force dual watch on and off on the radio) and DLog.net's built-in 
+(to immediately force dual watch on and off on the radio) and DXLog.net's built-in function
 to toggle audio mode. Does nothing if radio 1 not is selected.
 
 **ICOM_Speedsynch** Synchronizes the radio's internal keyer with *DXLog.net's* speed setting.
@@ -116,4 +116,4 @@ performance may not be completely reliable at 19200bps with frequent polling (< 
 For the most reliable and responsive operation, communication via the USB interface 
 at 115200bps is recommended.
 
-For additional information, see the source code or [www.sm7iun.se](https://sm7iun.se/contesting/dxlog-net/)
+For further information, see the source code or [www.sm7iun.se](https://sm7iun.se/contesting/dxlog-net/)
