@@ -48,7 +48,7 @@ add the scripts one by one, give them a name and assign a key those that need it
 | Script               | Suggested Name | Suggested Key                            |
 |----------------------|----------------|------------------------------------------|
 | ICOM_SO2V            | SO2V           | ` on english keyboard, § on Scandinavian | 
-| ICOM_SO2V_DW         | TOGGLEDWH      | Ctrl-Alt-S                               |  
+| ICOM_SO2V_DW         | TOGGLEDW       | Ctrl-Alt-S                               |  
 | ICOM_Speedsynch      | SPEED          | None                                     | 
 | ICOM_Filter          | FILTER         | ' or Alt-'                               |
 | ICOM_Bandpower*      | BANDPOWER      | None                                     |
