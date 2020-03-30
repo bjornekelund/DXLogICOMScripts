@@ -12,21 +12,24 @@ other radios, please email me or make a pull request.
 Main features are:
 1. Automatic focus shifting for radio's Main VFO knob in SO2V.
 2. Automatic main/sub audio switching in SO2V. (Ctrl-Alt-S or AltGr-S toggles permanent stereo on/off.)
-3. Automatic per-band output power level for safe PA operation. (Even supports cross-band SO2V if PA band switching is fast.) 
+3. Automatic per-band output power level for safe PA operation. (Even supports cross-band SO2V if PA band switching control is fast.) 
 4. Automatic setting of edges and reference level for the waterfall/spectrum display based on band and operating mode. 
 5. Single-key waterfall/spectrum display zoom. 
+6. Single-key switching between filter 1, 2, and 3.
 
-Note that if the utility [Icom Automagic](https://github.com/bjornekelund/ICOMautomagic) is used, 
+Note that if the utility [ICOM Automagic](https://github.com/bjornekelund/ICOMautomagic) is used, 
 items 3-5 are redundant and should not be enabled. 
+
+Note that if DXLog 2.4.19 or later is used, items 1 and 2 are redundant and should not be enabled.
 
 Minor modifications of the scripts (e.g. changing power levels or band edges) can be 
 done using any source code editor (*notepad++* is a good choice.)
 Any more sophisticated modification and/or extension of the scripts will greatly 
-benefit from using Visual Studio. The [community](https://visualstudio.microsoft.com/downloads)
-version is free of charge for individuals and open-source contributors. 
+benefit from using Visual Studio. The [community version](https://visualstudio.microsoft.com/downloads)
+is free of charge for individuals and open-source contributors. 
 
-Since the debugging facilities within *DXLog.net* are very limited, a more advanced SDK like Visual 
-Studio is a great help.
+Since the debugging facilities within *DXLog.net* are very limited, a more 
+advanced SDK like Visual Studio is a great help.
 The script kit is formatted for use in Visual Studio. Once cloned or 
 downloaded/decompressed, just double-click on the file `DXLogICOMScripts.sln` 
 to open the script kit in Visual Studio.
