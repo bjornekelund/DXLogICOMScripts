@@ -19,14 +19,17 @@ namespace DXLog.net
         // Executes at DXLog.net start 
         public void Initialize(FrmMain main)
         {
-            currentFilter = 2; // "Middle" filter
+            // Choose and set the "middle" filter at start up
+            currentFilter = 2; 
             SetIcomFilter(currentFilter, main);
         }
 
-        public void Deinitialize() { } // Do nothing at DXLog.net close down
+        // Executes as DXLog.net close down
+        public void Deinitialize() { } 
 
         // Step through filters, Main is mapped to a key, typically not a shifted 
         // key to allow rapid multiple presses
+        // The value of currentfilter steps through 1,2,3,1,2,3,1...
         public void Main(FrmMain main, ContestData cdata, COMMain comMain)
         {
             currentFilter = (currentFilter % 3) + 1;
@@ -35,22 +38,23 @@ namespace DXLog.net
 
         private void SetIcomFilter(int filter, FrmMain main)
         {
-
+            byte mode;
             bool modeIsSO2V = main.ContestDataProvider.OPTechnique == ContestData.Technique.SO2V;
             int focusedRadio = main.ContestDataProvider.FocusedRadio;
+
+            // Physical radio is always #1 in SO2V
             int physicalRadio = modeIsSO2V ? 1 : focusedRadio;
             CATCommon radio = main.COMMainProvider.RadioObject(physicalRadio);
-            byte vfo, mode = 0;
+
+            // Act on currently selected VFO. In SO2V, the selected "radio" defines which VFO
+            byte vfo = (byte)(((focusedRadio == 2) && modeIsSO2V) ? 0x01 : 0x00);
 
             // If there is no radio or if it is not ICOM, do nothing
             if (radio == null || !radio.IsICOM())
                 return;
 
-            // Act on currently selected VFO. In SO2V, the selected "radio" defines which VFO
-            vfo = (byte)(((focusedRadio == 2) && modeIsSO2V) ? 0x01 : 0x00);
-
             // The set filter CAT command requires mode information
-            // Only works for modes listed below 
+            // Exits and does nothing if current mode is not supported
             switch ((vfo == 0) ? radio.VFOAMode : radio.VFOBMode)
             {
                 case "LSB":
@@ -71,6 +75,8 @@ namespace DXLog.net
                 case "FM":
                     mode = 0x05;
                     break;
+                default:
+                    return;
             }
 
             // Always disable APF when switching filter
@@ -82,7 +88,7 @@ namespace DXLog.net
             radio.SendCustomCommand(IcomSetModeFilter);
 
             if (Debug)
-                main.SetMainStatusText(String.Format("IcomFilter: VFO {0} changed to FIL{1}. Command: [{2}]. ",
+                main.SetMainStatusText(String.Format("IcomFilter: VFO {0} changed to FIL{1}. CI-V command: [{2}]. ",
                     (vfo == 0) ? "A" : "B", filter, BitConverter.ToString(IcomSetModeFilter)));
             else
                 main.SetMainStatusText(String.Format("VFO {0} changed to FIL{1}.",
