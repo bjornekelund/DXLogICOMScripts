@@ -42,11 +42,14 @@ namespace DXLog.net
             CATCommon radio = main.COMMainProvider.RadioObject(physicalRadio);
             byte vfo, mode = 0;
 
+            // If there is no radio or if it is not ICOM, do nothing
             if (radio == null || !radio.IsICOM())
                 return;
 
+            // Act on currently selected VFO. In SO2V, the selected "radio" defines which VFO
             vfo = (byte)(((focusedRadio == 2) && modeIsSO2V) ? 0x01 : 0x00);
 
+            // The set filter CAT command requires mode information
             // Only works for modes listed below 
             switch ((vfo == 0) ? radio.VFOAMode : radio.VFOBMode)
             {
@@ -70,10 +73,12 @@ namespace DXLog.net
                     break;
             }
 
-            byte[] IcomSetModeFilter = { 0x26, vfo, mode, 0x00, (byte)filter };
+            // Always disable APF when switching filter
             byte[] IcomDisableAPF = { 0x16, 0x32, 0x00 };
-
             radio.SendCustomCommand(IcomDisableAPF);
+
+            // Switch filter
+            byte[] IcomSetModeFilter = { 0x26, vfo, mode, 0x00, (byte)filter };
             radio.SendCustomCommand(IcomSetModeFilter);
 
             if (Debug)
