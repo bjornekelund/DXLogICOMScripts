@@ -42,7 +42,7 @@ namespace DXLog.net
             bool modeIsSO2V = main.ContestDataProvider.OPTechnique == ContestData.Technique.SO2V;
             int focusedRadio = main.ContestDataProvider.FocusedRadio;
 
-            // Physical radio is always #1 in SO2V
+            // Physical radio is #1 in SO2V, otherwised the focused radio
             int physicalRadio = modeIsSO2V ? 1 : focusedRadio;
             CATCommon radio = main.COMMainProvider.RadioObject(physicalRadio);
 
