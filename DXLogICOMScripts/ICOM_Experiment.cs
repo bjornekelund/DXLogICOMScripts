@@ -7,58 +7,46 @@
 using System;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Input;
 using IOComm;
 using CWKeyer;
+using DXLog.net;
 
 namespace DXLog.net
 {
     public class Experiment : ScriptClass
     {
-        ContestData cdata;
+        //ContestData cdata;
         FrmMain mainForm;
 
-        readonly byte[] IcomSplitOff = { 0x0F, 0x00 };
-        readonly byte[] IcomSplitOn = { 0x0F, 0x01 };
-        static byte[] IcomSetSpeed = new byte[4] { 0x14, 0x0C, 0x00, 0x00 };
-        bool toggleSplit;
 
         public void Initialize(FrmMain main)
         {
-            cdata = main.ContestDataProvider;
+            //cdata = main.ContestDataProvider;
             mainForm = main;
-            toggleSplit = false;
+
+            mainForm.KeyDown += new KeyEventHandler(HandleKeyPress);
+            mainForm.KeyUp += new KeyEventHandler(HandleKeyRelease);
         }
 
         public void Deinitialize() { }
 
         public void Main(FrmMain main, ContestData cdata, COMMain comMain)
         {
-            CATCommon radio1 = mainForm.COMMainProvider.RadioObject(1);
-            int focusedRadio = mainForm.ContestDataProvider.FocusedRadio;
-            int ICOMspeed;
-
-            if (radio1 == null)
-            {
-                mainForm.SetMainStatusText("Experiment: Radio 1 is not available.");
-                return;
-            }
-
-            //if (toggleSplit)
-            //    radio1.SendCustomCommand(IcomSplitOn);
-            //else
-            //    radio1.SendCustomCommand(IcomSplitOff);
-
-            toggleSplit = !toggleSplit;
-
-            // Update keyer speed
-            ICOMspeed = (255 * (mainForm._cwKeyer.CWSpeed(focusedRadio) - 6)) / (48 - 6); // ICOM scales 6-48 WPM onto 0-255
-            IcomSetSpeed[2] = (byte)((ICOMspeed / 100) % 10);
-            IcomSetSpeed[3] = (byte)((((ICOMspeed / 10) % 10) << 4) + (ICOMspeed % 10));
-            radio1.SendCustomCommand(IcomSetSpeed);
-
             //main.SetMainStatusText(String.Format("Experiment: Speed={0} toggleSplit={1}", ICOMspeed, !toggleSplit));
-            main.SetMainStatusText(String.Format("Experiment: Callsign = {0}", mainForm.CurrentEntryLine.ActualQSO.Callsign));
+            //main.SetMainStatusText(String.Format("Experiment: Callsign = {0}", mainForm.CurrentEntryLine.ActualQSO.Callsign));
+        }
 
+        private void HandleKeyPress(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.RControlKey)
+                mainForm.SetMainStatusText(String.Format("Experiment: Key {0} pressed", e.KeyCode));
+        }
+
+        private void HandleKeyRelease(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.RControlKey)
+                mainForm.SetMainStatusText(String.Format("Experiment: Key {0} released", e.KeyCode));
         }
     }
 }
