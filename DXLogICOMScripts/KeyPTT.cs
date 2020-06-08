@@ -19,22 +19,48 @@ namespace DXLog.net
             cdata = main.ContestDataProvider;
             mainForm = main;
 
-            mainForm.KeyDown += new KeyEventHandler(HandleKeyPress);
-            mainForm.KeyUp += new KeyEventHandler(HandleKeyRelease);
+            //mainForm.KeyDown += new KeyEventHandler(HandleKeyPress);
+            //mainForm.KeyUp += new KeyEventHandler(HandleKeyRelease);
         }
 
         public void Deinitialize() { }
 
-        public void Main(FrmMain main, ContestData cdata, COMMain comMain) { }
+        public void Main(FrmMain main, ContestData cdata, COMMain comMain) 
+        {
+            cdata.TXOnRadio = cdata.FocusedRadio;
+            if (!Sending)
+            {
+                Sending = true;
+                mainForm.HandleTXRequestChange(Sending);
+                mainForm.SetMainStatusText(string.Format("Transmitting on radio {0}.", cdata.TXOnRadio));
+                mainForm.COMMainProvider.SetPTTOn(cdata.TXOnRadio, false);
+            }
+            else
+            {
+                Sending = false;
+                mainForm.HandleTXRequestChange(Sending);
+                mainForm.SetMainStatusText(string.Format("PTT off on radio {0}", cdata.TXOnRadio));
+                mainForm.COMMainProvider.SetPTTOff(cdata.FocusedRadio);
+            }
+        }
 
         private void HandleKeyPress(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.ControlKey && !Sending)
+            if (e.KeyCode == Keys.ControlKey)
             {
                 cdata.TXOnRadio = cdata.FocusedRadio;
-                mainForm.SetMainStatusText(string.Format("Transmitting on radio {0}.", cdata.TXOnRadio));
-                mainForm.COMMainProvider.SetPTTOn(cdata.TXOnRadio, false);
-                Sending = true;
+                if (!Sending)
+                {
+                    mainForm.SetMainStatusText(string.Format("Transmitting on radio {0}.", cdata.TXOnRadio));
+                    mainForm.COMMainProvider.SetPTTOn(cdata.TXOnRadio, false);
+                    Sending = true;
+                }
+                else
+                {
+                    mainForm.SetMainStatusText(string.Format("PTT off on radio {0}", cdata.TXOnRadio));
+                    mainForm.COMMainProvider.SetPTTOff(cdata.FocusedRadio);
+                    Sending = false;
+                }
             }
         }
 
