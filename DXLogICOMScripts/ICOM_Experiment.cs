@@ -33,6 +33,15 @@ namespace DXLog.net
 
         public void Main(FrmMain main, ContestData cdata, COMMain comMain)
         {
+            //byte[] msg1 = new byte[] { 0x17, (byte)'A', (byte)'B', (byte)' ', (byte)'A', (byte)' ', (byte)'B' };
+            //byte[] msg2 = new byte[] { 0x17, (byte)'A', (byte)'B', (byte)' ', (byte)'A', (byte)' ', (byte)'B' };
+            byte[] msg1 = new byte[] { 0x17, (byte)'A', (byte)'B' };
+            byte[] msg2 = new byte[] { 0x17, (byte)'C', (byte)'D' };
+
+            CATCommon radio1 = mainForm.COMMainProvider.RadioObject(1);
+            radio1.SendCustomCommand(msg1);
+            radio1.SendCustomCommand(msg2);
+
             //main.SetMainStatusText(String.Format("Experiment: Speed={0} toggleSplit={1}", ICOMspeed, !toggleSplit));
             //main.SetMainStatusText(String.Format("Experiment: Callsign = {0}", mainForm.CurrentEntryLine.ActualQSO.Callsign));
         }
