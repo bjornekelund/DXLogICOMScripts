@@ -57,6 +57,7 @@ add the scripts one by one, give them a name and assign a key those that need it
 | ICOM_Bandpower*      | BANDPOWER      | None                                     |
 | ICOM_Waterfall_Mode* | WFMODE         | Alt-U                                    | 
 | ICOM_Waterfall_Zoom* | WFZOOM         | Alt-Z                                    |
+| ICOM_RxAnt           | RXANT          | Ctrl-F12                                    |
 
 
 \* Redundant and should not be enabled if the [ICOMautomagic](https://github.com/bjornekelund/ICOMautomagic) utility is used.
@@ -111,6 +112,8 @@ only one is waterfall capable, modify the object `WaterfallCapable[]` accordingl
 **ICOM_Waterfall_Zoom** Script to quickly zoom the radio's built in panadapter to a 
 narrow segment of the band (default is 20kHz, but easily modified in the script code) 
 centered around the current frequency.
+
+**ICOM_RxAnt** Script that toggles the separate receive antenna input. Also works in SO2R.
 
 **ICOM_Experiment** A script solely for development purposes. No need to install. 
 
