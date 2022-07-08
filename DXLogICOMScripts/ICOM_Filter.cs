@@ -88,10 +88,10 @@ namespace DXLog.net
             radio.SendCustomCommand(IcomSetModeFilter);
 
             if (Debug)
-                main.SetMainStatusText(String.Format("IcomFilter: VFO {0} changed to FIL{1}. CI-V command: [{2}]. ",
+                main.SetMainStatusText(string.Format("IcomFilter: VFO {0} changed to FIL{1}. CI-V command: [{2}]. ",
                     (vfo == 0) ? "A" : "B", filter, BitConverter.ToString(IcomSetModeFilter)));
             else
-                main.SetMainStatusText(String.Format("VFO {0} changed to FIL{1}.",
+                main.SetMainStatusText(string.Format("VFO {0} changed to FIL{1}.",
                     (vfo == 0) ? "A" : "B", filter));
         }
     }

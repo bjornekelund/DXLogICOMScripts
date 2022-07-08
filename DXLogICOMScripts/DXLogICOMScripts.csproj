@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ICOM_Bandpower.cs" />
+    <Compile Include="ICOM_RxAnt.cs" />
     <Compile Include="KeyPTT.cs" />
     <Compile Include="ICOM_Experiment.cs" />
     <Compile Include="ICOM_CQ_Radio1.cs" />

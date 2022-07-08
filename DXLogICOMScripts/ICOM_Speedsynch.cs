@@ -58,7 +58,7 @@ namespace DXLog.net
 
             if (radioObject == null)
             {
-                mainForm.SetMainStatusText(String.Format("IcomSpeedSynch: Radio {0} is not available!", physicalRadio));
+                mainForm.SetMainStatusText(string.Format("IcomSpeedSynch: Radio {0} is not available!", physicalRadio));
                 return;
             }
 
@@ -68,7 +68,7 @@ namespace DXLog.net
             IcomSetSpeed[3] = (byte)((((ICOMspeed / 10) % 10) << 4) + (ICOMspeed % 10));
             radioObject.SendCustomCommand(IcomSetSpeed);
 
-            if (Debug) mainForm.SetMainStatusText(String.Format(
+            if (Debug) mainForm.SetMainStatusText(string.Format(
                 "IcomSpeedSynch: {0}. Command: [{1}]. Radio {2} CW speed changed to {3} wpm! R1speed = {4} R2speed = {5}.",
                 ICOMspeed, BitConverter.ToString(IcomSetSpeed), radioNumber, mainForm._cwKeyer.CWSpeed(radioNumber), mainForm._cwKeyer.CWSpeed(1), mainForm._cwKeyer.CWSpeed(2))
                 );
@@ -98,7 +98,7 @@ namespace DXLog.net
                 radio1.SendCustomCommand(IcomSetSpeed);
 
                 if (Debug) mainForm.SetMainStatusText(
-                    String.Format("IcomSpeedSynch: {0}. Command: [{1}]. Radio {2} CW speed changed to {3} wpm!",
+                    string.Format("IcomSpeedSynch: {0}. Command: [{1}]. Radio {2} CW speed changed to {3} wpm!",
                     ICOMspeed, BitConverter.ToString(IcomSetSpeed), focusedRadio, mainForm._cwKeyer.CWSpeed(focusedRadio))
                     );
             }

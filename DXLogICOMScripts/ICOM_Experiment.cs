@@ -49,13 +49,13 @@ namespace DXLog.net
         private void HandleKeyPress(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.RControlKey)
-                mainForm.SetMainStatusText(String.Format("Experiment: Key {0} pressed", e.KeyCode));
+                mainForm.SetMainStatusText(string.Format("Experiment: Key {0} pressed", e.KeyCode));
         }
 
         private void HandleKeyRelease(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.RControlKey)
-                mainForm.SetMainStatusText(String.Format("Experiment: Key {0} released", e.KeyCode));
+                mainForm.SetMainStatusText(string.Format("Experiment: Key {0} released", e.KeyCode));
         }
     }
 }
