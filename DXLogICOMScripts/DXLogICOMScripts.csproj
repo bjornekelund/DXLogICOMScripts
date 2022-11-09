@@ -82,10 +82,8 @@
   <ItemGroup>
     <Compile Include="ICOM_Bandpower.cs" />
     <Compile Include="ICOM_RxAnt.cs" />
-    <Compile Include="KeyPTT.cs" />
     <Compile Include="ICOM_Experiment.cs" />
     <Compile Include="ICOM_CQ_Radio1.cs" />
-    <Compile Include="Yaesu_Antenna.cs" />
     <Compile Include="ICOM_Filter.cs" />
     <Compile Include="ICOM_SO2V_DW.cs" />
     <Compile Include="ICOM_SO2V.cs" />

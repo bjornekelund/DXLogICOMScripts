@@ -13,6 +13,10 @@
 // Only active for ICOM radio but does not verify radio is SO2V capable
 // By Björn Ekelund SM7IUN sm7iun@ssa.se 2019-09-19
 
+//
+// NB. For educational purposes only. This functionality is now native to DXLog.
+//
+
 using IOComm;
 
 namespace DXLog.net

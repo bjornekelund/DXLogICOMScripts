@@ -4,6 +4,10 @@
 // Focus radio 1 and send CQ 
 // By Björn Ekelund SM7IUN sm7iun@ssa.se 2020-04-15
 
+//
+// NB. For educational purposes only. This functionality is now native to DXLog.
+//
+
 using System;
 using IOComm;
 using System.Threading;
