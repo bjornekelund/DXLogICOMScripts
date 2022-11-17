@@ -13,6 +13,8 @@
 // Separate frequency and ref levels for radio 1 and radio 2.
 // By Björn Ekelund SM7IUN sm7iun@ssa.se 2019-01-30
 
+// Mainly for educational purposes. Better use the DXLogIcomControl custom form. 
+
 using System;
 using IOComm;
 
