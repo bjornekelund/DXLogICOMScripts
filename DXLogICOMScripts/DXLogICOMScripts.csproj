@@ -87,7 +87,6 @@
     <Compile Include="ICOM_Filter.cs" />
     <Compile Include="ICOM_SO2V_DW.cs" />
     <Compile Include="ICOM_SO2V.cs" />
-    <Compile Include="ICOM_Speedsynch.cs" />
     <Compile Include="ICOM_Waterfall_Mode.cs" />
     <Compile Include="ICOM_Waterfall_Zoom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
