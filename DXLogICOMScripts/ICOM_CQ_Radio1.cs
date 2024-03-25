@@ -8,7 +8,6 @@
 // NB. For educational purposes only. This functionality is now native to DXLog.
 //
 
-using System;
 using IOComm;
 using System.Threading;
 
