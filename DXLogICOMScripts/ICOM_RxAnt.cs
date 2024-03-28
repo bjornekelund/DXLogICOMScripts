@@ -1,15 +1,13 @@
-//INCLUDE_ASSEMBLY System.dll
-//INCLUDE_ASSEMBLY System.Windows.Forms.dll
-
 // ICOM 7851/7610 Receive antenna toggling.
 // By Björn Ekelund SM7IUN sm7iun@sm7iun.se 2022-07-08
 
 using System;
 using IOComm;
+using NAudio.Midi;
 
 namespace DXLog.net
 {
-    public class IcomRxAnt : ScriptClass
+    public class IcomRxAnt : IScriptClass
     {
         readonly bool StatusText = true;
 
@@ -30,32 +28,32 @@ namespace DXLog.net
         }
 
         // Executes at macro invocation
-        public void Main(FrmMain main, ContestData cdata, COMMain comMain)
+        public void Main(FrmMain mainForm, ContestData cdata, COMMain comMain, MidiEvent midiEvent)
         {
             // Toggle state of Rx antenna for currently focused radio
-            SetIcomRxAnt(cdata.FocusedRadio, !RxAntEnabled[cdata.FocusedRadio - 1], main);
+            SetIcomRxAnt(cdata.FocusedRadio, !RxAntEnabled[cdata.FocusedRadio - 1], mainForm);
         }
 
         private void SetIcomRxAnt(int radio, bool enabled, FrmMain main)
         {
-            CATCommon radioobject = radio == 1 ? main.COMMainProvider._radio1Object : main.COMMainProvider._radio2Object;
+            var radioObject = radio == 1 ? main.COMMainProvider._radio1Object : main.COMMainProvider._radio2Object;
 
-            if (radioobject != null)
+            if (radioObject != null)
             {
                 RxAntEnabled[radio - 1] = enabled;
                 CIVcmd[2] = (byte)(enabled ? 0x01 : 0x00);
-                radioobject.SendCustomCommand(CIVcmd);
+                radioObject.SendCustomCommand(CIVcmd);
 
                 if (StatusText)
                 {
-                    main.SetMainStatusText(string.Format("IcomRxAnt: Rx antenna {0} on radio {1} with command {2}.", enabled ? "enabled" : "disabled", radio, BitConverter.ToString(CIVcmd)));
+                    main.SetMainStatusText($"IcomRxAnt: Rx antenna {(enabled ? "enabled" : "disabled")} on radio {radio} with command {BitConverter.ToString(CIVcmd)}.");
                 }
             }
             else
             {
                 if (StatusText)
                 {
-                    main.SetMainStatusText(string.Format("IcomRxAnt: Radio {0} is not available.", radio));
+                    main.SetMainStatusText($"IcomRxAnt: Radio {radio} is not available.");
                 }
             }
         }

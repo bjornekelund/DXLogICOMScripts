@@ -1,6 +1,3 @@
-//INCLUDE_ASSEMBLY System.dll
-//INCLUDE_ASSEMBLY System.Windows.Forms.dll
-
 // ICOM waterfall/spectrum display management for IC-785x, IC-7300 and IC-7610.
 // Sets waterfall/spectrum display range based on band and operating mode.
 // Invoked automatically at band changes made either on radio or in DXLog.net
@@ -17,10 +14,11 @@
 
 using System;
 using IOComm;
+using NAudio.Midi;
 
 namespace DXLog.net
 {
-    public class IcomWaterfallMode : ScriptClass
+    public class IcomWaterfallMode : IScriptClass
     {
         static readonly bool debug = false;
         ContestData cdata;
@@ -102,7 +100,7 @@ namespace DXLog.net
 
         public void Deinitialize() {}
 
-        public void Main(FrmMain main, ContestData cdata, COMMain comMain)
+        public void Main(FrmMain mainForm, ContestData cdata, COMMain comMain, MidiEvent midiEvent)
         {
             HandleActiveRadioBandChanged(1);
         }
@@ -163,10 +161,7 @@ namespace DXLog.net
             IcomSetRefLevel[5] = (refLevel >= 0) ? (byte)0 : (byte)1;
 
             if (debug)
-                mainForm.SetMainStatusText(
-                    string.Format("IcomWaterfallMode: Radio # {0} Modestring '{1}' Edge {2} Low {3} High {4} Ref {5} Commands: [{6}] [{7}]", 
-                    usedRadioIndex + 1, usedRadio.VFOAMode, UsedEdgeSet, lowerEdge, upperEdge, refLevel, BitConverter.ToString(IcomSetEdges), 
-                    BitConverter.ToString(IcomSetRefLevel)));
+                mainForm.SetMainStatusText($"IcomWaterfallMode: Radio # {usedRadioIndex + 1} Modestring '{usedRadio.VFOAMode}' Edge {UsedEdgeSet} Low {lowerEdge} High {upperEdge} Ref {refLevel} Commands: [{BitConverter.ToString(IcomSetEdges)}] [{BitConverter.ToString(IcomSetRefLevel)}]");
 
             usedRadio.SendCustomCommand(IcomSetFixedMode); // Set fixed mode
             usedRadio.SendCustomCommand(IcomSetEdgeSet); // Select edge set EdgeSet

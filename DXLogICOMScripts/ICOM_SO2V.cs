@@ -1,6 +1,3 @@
-//INCLUDE_ASSEMBLY System.dll
-//INCLUDE_ASSEMBLY System.Windows.Forms.dll
-
 // ICOM SO2V VFO focus and audio management, event driven but also mapped 
 // to key for stereo/main toggling when Radio 1 (main receiver in SO2V) is 
 // selected. Key used is typically § (on EU keyboard) or `(on US keyboard) 
@@ -18,10 +15,11 @@
 //
 
 using IOComm;
+using NAudio.Midi;
 
 namespace DXLog.net
 {
-    public class IcomSO2V : ScriptClass
+    public class IcomSO2V : IScriptClass
     {
         readonly bool Debug = false;
         FrmMain mainForm;
@@ -40,9 +38,9 @@ namespace DXLog.net
         // Executes at DXLog.net start 
         public void Initialize(FrmMain main)
         {
-            CATCommon radio1 = main.COMMainProvider.RadioObject(1);
+            var radio1 = main.COMMainProvider.RadioObject(1);
             mainForm = main;
-            bool modeIsSo2V = (mainForm.ContestDataProvider.OPTechnique == ContestData.Technique.SO2V);
+            var modeIsSo2V = (mainForm.ContestDataProvider.OPTechnique == ContestData.Technique.SO2V);
 
             if (modeIsSo2V)
             {
@@ -68,16 +66,16 @@ namespace DXLog.net
         public void Deinitialize() { }
 
         // Toggle dual watch when radio 1 is focused in SO2V. Typically mapped to a key in upper left corner of keyboard.
-        public void Main(FrmMain main, ContestData cdata, COMMain comMain)
+        public void Main(FrmMain mainForm, ContestData cdata, COMMain comMain, MidiEvent midiEvent)
         {
-            int focusedRadio = cdata.FocusedRadio;
-            CATCommon radio1 = comMain.RadioObject(focusedRadio);
-            bool radio1Present = radio1 != null;
+            var focusedRadio = cdata.FocusedRadio;
+            var radio1 = comMain.RadioObject(focusedRadio);
+            var radio1Present = radio1 != null;
 
             if ((focusedRadio == 1) && cdata.OPTechnique == ContestData.Technique.SO2V)
             { // If VFO A focused, SO2V and radio present
                 tempStereoAudio = !tempStereoAudio;
-                main.SetMainStatusText(tempStereoAudio ? "Both receivers." : "Main receiver only.");
+                mainForm.SetMainStatusText(tempStereoAudio ? "Both receivers." : "Main receiver only.");
                 if (radio1Present)
                     radio1.SendCustomCommand(tempStereoAudio ? IcomDualWatchOn : IcomDualWatchOff);
             }
@@ -86,10 +84,10 @@ namespace DXLog.net
         // Event handler invoked when switching between VFO (SO2V) in DXLog.net
         void HandleFocusChange()
         {
-            CATCommon radio1 = mainForm.COMMainProvider.RadioObject(1);
-            int focusedRadio = mainForm.ContestDataProvider.FocusedRadio;
-            bool stereoAudio = mainForm.ListenStatusMode == COMMain.ListenMode.R1R2;
-            bool radio1Present = radio1 != null;
+            var radio1 = mainForm.COMMainProvider.RadioObject(1);
+            var focusedRadio = mainForm.ContestDataProvider.FocusedRadio;
+            var stereoAudio = mainForm.ListenStatusMode == COMMain.ListenMode.R1R2;
+            var radio1Present = radio1 != null;
 
             if (focusedRadio != lastFocus) // Only active in SO2V and with ICOM. Ignore false invokes.
             {
@@ -103,8 +101,7 @@ namespace DXLog.net
                     radio1.SendCustomCommand(stereoAudio || (focusedRadio == 2) ? IcomDualWatchOn : IcomDualWatchOff);
                 }
 
-                if (Debug) mainForm.SetMainStatusText(string.Format("IcomSO2V: Listenmode {0}. Focus is Radio #{1}",
-                    mainForm.ListenStatusMode, focusedRadio));
+                if (Debug) mainForm.SetMainStatusText($"IcomSO2V: Listenmode {mainForm.ListenStatusMode}. Focus is Radio #{focusedRadio}");
                 else
                     mainForm.SetMainStatusText("Focus on " + ((focusedRadio == 1) ? "main" : "sub") + " VFO. " +
                         (stereoAudio || (focusedRadio == 2) ? "Both receivers" : "Main receiver only"));

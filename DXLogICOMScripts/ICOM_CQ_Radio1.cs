@@ -1,6 +1,3 @@
-//INCLUDE_ASSEMBLY System.dll
-//INCLUDE_ASSEMBLY System.Windows.Forms.dll
-
 // Focus radio 1 and send CQ 
 // By Björn Ekelund SM7IUN sm7iun@ssa.se 2020-04-15
 
@@ -10,10 +7,11 @@
 
 using IOComm;
 using System.Threading;
+using NAudio.Midi;
 
 namespace DXLog.net
 {
-    public class IcomCQRadio1 : ScriptClass
+    public class IcomCQRadio1 : IScriptClass
     {
         readonly bool Debug = false;
 
@@ -28,7 +26,7 @@ namespace DXLog.net
         } 
 
         // Switch to radio 1 if not selected. Then send CQ. 
-        public void Main(FrmMain main, ContestData cdata, COMMain comMain)
+        public void Main(FrmMain mainForm, ContestData cdata, COMMain comMain, MidiEvent midiEvent)
         {
             const int RUN = 0;
             const int radioSwitchingDelay = 25;
@@ -37,19 +35,19 @@ namespace DXLog.net
             {
                 if (cdata.FocusedRadio == 2)
                 {
-                    main.handleKeyCommand("CHANGE_ACTIVE_RADIO", null, string.Empty);
+                    mainForm.handleKeyCommand("CHANGE_ACTIVE_RADIO", null, string.Empty);
                 }
 
                 //Thread.Sleep(25);
 
                 if (cdata.RadioModePrimary != RUN)
                 {
-                    main.handleKeyCommand("CHANGE_RUNSPMODE_PRIMARY", null, string.Empty);
+                    mainForm.handleKeyCommand("CHANGE_RUNSPMODE_PRIMARY", null, string.Empty);
                 }
 
                 Thread.Sleep(radioSwitchingDelay);
 
-                main.SendKeyMessage(false, "F1");
+                mainForm.SendKeyMessage(false, "F1");
             }
         }
     }

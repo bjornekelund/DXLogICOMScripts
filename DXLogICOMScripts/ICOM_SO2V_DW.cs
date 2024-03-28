@@ -1,6 +1,3 @@
-//INCLUDE_ASSEMBLY System.dll
-//INCLUDE_ASSEMBLY System.Windows.Forms.dll
-
 // ICOM SO2V helper script to toggle permanent dual watch on and off. 
 // Mapped to Ctrl-Alt-S (AltGr-S) so that it executes together with the 
 // built-in listen mode toggle. 
@@ -12,10 +9,11 @@
 //
 
 using IOComm;
+using NAudio.Midi;
 
 namespace DXLog.net
 {
-    public class IcomSO2VDW : ScriptClass
+    public class IcomSO2VDW : IScriptClass
     {
         readonly byte[] IcomDualWatchOn = { 0x07, 0xC1 };
         readonly byte[] IcomDualWatchOff = { 0x07, 0xC0 };
@@ -24,22 +22,22 @@ namespace DXLog.net
         public void Deinitialize() { } 
 
         // Toggle permanent dual watch, execution of Main is mapped to same key as built-in toggle Ctrl-Alt-S = AltGr-S.
-        public void Main(FrmMain main, ContestData cdata, COMMain comMain)
+        public void Main(FrmMain mainForm, ContestData cdata, COMMain comMain, MidiEvent midiEvent)
         {
-            CATCommon radio1 = comMain.RadioObject(1);
-            int focusedRadio = cdata.FocusedRadio;
-            bool stereoAudio = main.ListenStatusMode == COMMain.ListenMode.R1R2;
-            bool modeIsSo2V = cdata.OPTechnique == ContestData.Technique.SO2V;
-            bool radio1Present = radio1 != null;
+            var radio1 = comMain.RadioObject(1);
+            var focusedRadio = cdata.FocusedRadio;
+            var stereoAudio = mainForm.ListenStatusMode == COMMain.ListenMode.R1R2;
+            var modeIsSo2V = cdata.OPTechnique == ContestData.Technique.SO2V;
+            var radio1Present = radio1 != null;
 
-            main.SetMainStatusText("Sub receiver " + (stereoAudio ? "not " : "") + "permanently on.");
+            mainForm.SetMainStatusText("Sub receiver " + (stereoAudio ? "not " : "") + "permanently on.");
 
             if (focusedRadio == 1 && radio1Present && modeIsSo2V)
                 if (radio1.IsICOM())
                     radio1.SendCustomCommand(stereoAudio ? IcomDualWatchOff : IcomDualWatchOn);
 
             // Also execute the normal operation of the key
-            main.ScriptContinue = true;
+            mainForm.ScriptContinue = true;
         }
     }
 }

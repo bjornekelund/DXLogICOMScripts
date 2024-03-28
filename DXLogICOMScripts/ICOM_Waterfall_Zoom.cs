@@ -1,6 +1,3 @@
-//INCLUDE_ASSEMBLY System.dll
-//INCLUDE_ASSEMBLY System.Windows.Forms.dll
-
 // ICOM waterfall/spectrum display management.
 // Mapped to suitable key for creating a +/- WaterfallWidth fixed spectrum display  
 // Does not support dual spectrum display and thus only considers VFO A.
@@ -13,14 +10,13 @@
 
 using System;
 using IOComm;
+using NAudio.Midi;
 
 namespace DXLog.net
 {
-    public class IcomWaterfallZoom : ScriptClass
+    public class IcomWaterfallZoom : IScriptClass
     {
         static readonly bool debug = false;
-        ContestData cdata;
-        FrmMain mainForm;
 
         // Defines which of the radio's three edge sets is manipulated by script 
         static readonly byte UsedEdgeSet = 3; // which scope edge should be manipulated
@@ -40,12 +36,16 @@ namespace DXLog.net
         };
 
         // Extend to 75 to avoid crash with 4m capable radios
-        static readonly int[,] RefLevel = new int[2,75]; 
+        static readonly int[,] RefLevel = new int[2, 75];
 
         // Maps actual MHz to radio's scope edge set on ICOM 7800, 785x, 7300 and 7610
         static readonly int[] RadioEdgeSet = new int[] { 1, 2, 3, 3, 3, 3, 4, 4, 5, 5, 5, 6,
             6, 6, 6, 7, 7, 7, 7, 7, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11,
             11, 11, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12 };
+
+        public IcomWaterfallZoom(FrmMain mainForm)
+        {
+        }
 
         public void Initialize(FrmMain main)
         {
@@ -76,42 +76,40 @@ namespace DXLog.net
             RefLevel[1, 50] = 2; //  6m Radio 2
         }
 
-        public void Deinitialize() {}
+        public void Deinitialize() { }
 
-        public void Main(FrmMain main, ContestData cdata, COMMain comMain)
+        public void Main(FrmMain mainForm, ContestData cdata, COMMain comMain, MidiEvent midiEvent)
         {
-            CATCommon usedRadio;
-            int lowerEdge, upperEdge, refLevel, absRefLevel, megaHertz;
-            int RadioNumber = cdata.FocusedRadio;
+            var radioNumber = cdata.FocusedRadio;
 
             // Radio index is radio number - 1 for SO2R, otherwise 0 which represents radio 1
-            int usedRadioIndex = ((cdata.OPTechnique == ContestData.Technique.SO2R) || (cdata.OPTechnique == ContestData.Technique.SO2R_ADV)) ? RadioNumber - 1 : 0;
+            var usedRadioIndex = cdata.OPTechnique == ContestData.Technique.SO2R || cdata.OPTechnique == ContestData.Technique.SO2R_ADV ? radioNumber - 1 : 0;
 
             // If on VFO B in SO2V, do nothing and return
-            if ((cdata.OPTechnique == ContestData.Technique.SO2V) && (RadioNumber == 2)) 
-            return;
+            if (cdata.OPTechnique == ContestData.Technique.SO2V && radioNumber == 2)
+                return;
 
             // If not waterfall capable, do nothing and return
-            if (!WaterfallCapable[usedRadioIndex]) 
-            return;
+            if (!WaterfallCapable[usedRadioIndex])
+                return;
 
             // only do when we know we have a valid radio index
-            usedRadio = main.COMMainProvider.RadioObject(usedRadioIndex + 1);
+            var usedRadio = mainForm.COMMainProvider.RadioObject(usedRadioIndex + 1);
 
             // If no CAT capable radio present
-            if (usedRadio == null) 
+            if (usedRadio == null)
             {
-                main.SetMainStatusText(string.Format("IcomWaterfallZoom: Radio {0} is not available.", usedRadioIndex + 1));
+                mainForm.SetMainStatusText($"IcomWaterfallZoom: Radio {usedRadioIndex + 1} is not available.");
                 return;
             }
 
-            megaHertz = (int)(usedRadio.VFOAFrequency / 1000.0);
+            var megaHertz = (int)(usedRadio.VFOAFrequency / 1000.0);
 
-            lowerEdge = (int)(usedRadio.VFOAFrequency + 0.5 - WaterfallWidth / 2.0);
-            upperEdge = (int)(lowerEdge + WaterfallWidth);
+            var lowerEdge = (int)(usedRadio.VFOAFrequency + 0.5 - WaterfallWidth / 2.0);
+            var upperEdge = (int)(lowerEdge + WaterfallWidth);
 
-            refLevel = RefLevel[usedRadioIndex, megaHertz];
-            absRefLevel = (refLevel >= 0) ? refLevel : -refLevel;
+            var refLevel = RefLevel[usedRadioIndex, megaHertz];
+            var absRefLevel = (refLevel >= 0) ? refLevel : -refLevel;
 
             IcomSetEdges[2] = (byte)(((RadioEdgeSet[megaHertz] / 10) << 4) + (RadioEdgeSet[megaHertz] % 10));
             IcomSetEdges[5] = (byte)(((lowerEdge % 10) << 4)); // 1kHz & 100Hz
@@ -125,10 +123,7 @@ namespace DXLog.net
             IcomSetRefLevel[5] = (refLevel >= 0) ? (byte)0 : (byte)1;
 
             if (debug)
-                main.SetMainStatusText(
-                    string.Format("IcomWaterfallZoom: Radio # {0} Edge {1} Low {2} High {3} Ref {4} Commands: [{5}] [{6}]",
-                    usedRadioIndex + 1, UsedEdgeSet, lowerEdge, upperEdge, refLevel, BitConverter.ToString(IcomSetEdges),
-                    BitConverter.ToString(IcomSetRefLevel)));
+                mainForm.SetMainStatusText($"IcomWaterfallZoom: Radio # {usedRadioIndex + 1} Edge {UsedEdgeSet} Low {lowerEdge} High {upperEdge} Ref {refLevel} Commands: [{BitConverter.ToString(IcomSetEdges)}] [{BitConverter.ToString(IcomSetRefLevel)}]");
 
             usedRadio.SendCustomCommand(IcomSetFixedMode); // Set fixed mode
             usedRadio.SendCustomCommand(IcomSetEdgeSet); // Select edge set EdgeSet

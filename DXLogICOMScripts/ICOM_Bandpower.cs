@@ -1,6 +1,3 @@
-//INCLUDE_ASSEMBLY System.dll
-//INCLUDE_ASSEMBLY System.Windows.Forms.dll
-
 // ICOM per band output power for IC-785x, IC-7300 and IC-7610
 // Sets output power to a safe level at band changes.
 // Invoked automatically at band changes made either on radio or in DXLog
@@ -12,10 +9,11 @@
 
 using System;
 using IOComm;
+using NAudio.Midi;
 
 namespace DXLog.net
 {
-    public class IcomBandPower : ScriptClass
+    public class IcomBandPower : IScriptClass
     {
         static readonly bool Debug = false;
         ContestData cdata;
@@ -62,8 +60,8 @@ namespace DXLog.net
 
         public void Initialize(FrmMain main)
         {
-            int radioIndex, bandIndex, megaHertz;
-            CATCommon radio1 = main.COMMainProvider.RadioObject(1);
+            int radioIndex, bandIndex;
+            var radio1 = main.COMMainProvider.RadioObject(1);
 
             cdata = main.ContestDataProvider;
             mainForm = main;
@@ -76,7 +74,7 @@ namespace DXLog.net
             for (radioIndex = 0; radioIndex < 2; radioIndex++)
                 for (bandIndex = 0; bandIndex < 12; bandIndex++)
                 {
-                    megaHertz = (int)(_txpower[radioIndex, bandIndex, 0] / 1000.0);
+                    var megaHertz = (int)(_txpower[radioIndex, bandIndex, 0] / 1000.0);
                     TxPower[radioIndex, megaHertz] = _txpower[radioIndex, bandIndex, 1];
                 }
 
@@ -85,16 +83,13 @@ namespace DXLog.net
 
         public void Deinitialize() { }
 
-        public void Main(FrmMain main, ContestData cdata, COMMain comMain)
+        public void Main(FrmMain mainForm, ContestData cdata, COMMain comMain, MidiEvent midiEvent)
         {
             HandleBandChange(mainForm.ContestDataProvider.FocusedRadio);
         }
 
-        private void HandleBandChange(int RadioNumber)
+        private void HandleBandChange(int radioNumber)
         {
-            CATCommon usedRadio;
-            int megaHertz, usedPower;
-
             // Special arrangement to avoid confusing the power control logic in SO2V. 
             // During start up DXLog raises one band change event per radio.
             // The second event for radio 2 confuses the logic in SO2V. 
@@ -108,27 +103,28 @@ namespace DXLog.net
             }
 
             // usedRadio index is radio number - 1 for SO2R, otherwise 0 which represents radio 1
-            int usedRadioIndex = ((cdata.OPTechnique == ContestData.Technique.SO2R) || (cdata.OPTechnique == ContestData.Technique.SO2R_ADV)) ? RadioNumber - 1 : 0;
+            var usedRadioIndex = ((cdata.OPTechnique == ContestData.Technique.SO2R) || (cdata.OPTechnique == ContestData.Technique.SO2R_ADV)) ? radioNumber - 1 : 0;
 
-            usedRadio = mainForm.COMMainProvider.RadioObject(usedRadioIndex + 1);
+            var usedRadio = mainForm.COMMainProvider.RadioObject(usedRadioIndex + 1);
 
             if (usedRadio == null) // No CAT capable radio present
             {
-                mainForm.SetMainStatusText(string.Format("IcomBandPower: Radio {0} is not available.", usedRadioIndex + 1));
+                mainForm.SetMainStatusText($"IcomBandPower: Radio {usedRadioIndex + 1} is not available.");
                 return;
             }
 
             if (!usedRadio.IsICOM()) // if radio is not ICOM, do nothing and return
                 return;
 
-            if ((RadioNumber == 1) || (RadioNumber == 2)) // If a regular band change 
+            if ((radioNumber == 1) || (radioNumber == 2)) // If a regular band change 
             {
-                if ((cdata.OPTechnique == ContestData.Technique.SO2V) && (RadioNumber == 2)) // In SO2V, logical radio 2 is physical radio 1 VFO B
+                int megaHertz;
+                if ((cdata.OPTechnique == ContestData.Technique.SO2V) && (radioNumber == 2)) // In SO2V, logical radio 2 is physical radio 1 VFO B
                     megaHertz = (int)(usedRadio.VFOBFrequency / 1000.0);
                 else
                     megaHertz = (int)(usedRadio.VFOAFrequency / 1000.0);
 
-                usedPower = (int)((255.0f * TxPower[usedRadioIndex, megaHertz]) / 100.0f + 0.99f); // Weird ICOM mapping of percent to binary
+                var usedPower = (int)((255.0f * TxPower[usedRadioIndex, megaHertz]) / 100.0f + 0.99f);
                 if (usedPower > 255) usedPower = 255;
 
                 IcomSetPower[2] = (byte)((usedPower / 100) % 10);
@@ -136,25 +132,20 @@ namespace DXLog.net
                 usedRadio.SendCustomCommand(IcomSetPower); // Set power
 
                 if (Debug)
-                    mainForm.SetMainStatusText(
-                        string.Format("IcomBandPower: Band Change: Controlled radio #{0} Focused Radio #{1} megaHertz {2} Power {3}% UsedPower {4} Command: [{5}]",
-                        usedRadioIndex + 1, RadioNumber, megaHertz, TxPower[usedRadioIndex, megaHertz],
-                        usedPower, BitConverter.ToString(IcomSetPower)));
+                    mainForm.SetMainStatusText($"IcomBandPower: Band Change: Controlled radio #{usedRadioIndex + 1} Focused Radio #{radioNumber} megaHertz {megaHertz} Power {TxPower[usedRadioIndex, megaHertz]}% UsedPower {usedPower} Command: [{BitConverter.ToString(IcomSetPower)}]");
             }
         }
 
         private void HandleFocusChange()
         {
-            CATCommon usedRadio;
-            int focusedRadio = cdata.FocusedRadio;
-            int megaHertz, usedPower;
+            var focusedRadio = cdata.FocusedRadio;
 
             // Only act if SO2V. No need to verify radio as ICOM since handler is
             // not active otherwise. In SO2V only physical radio 1 is used. 
             // Logical radio 1 is VFO A, logical radio 2 is VFO B
             if (cdata.OPTechnique == ContestData.Technique.SO2V) 
             {
-                usedRadio = mainForm.COMMainProvider.RadioObject(1);
+                var usedRadio = mainForm.COMMainProvider.RadioObject(1);
 
                 if (usedRadio == null)
                 {
@@ -166,12 +157,13 @@ namespace DXLog.net
                 // manual adjustments untouched in same-band operation
                 if ((int)(usedRadio.VFOAFrequency / 1000.0) != (int)(usedRadio.VFOBFrequency / 1000.0))
                 {
+                    int megaHertz;
                     if (focusedRadio == 2) // Logical radio 2 is physical radio 1 VFO B
                         megaHertz = (int)(usedRadio.VFOBFrequency / 1000.0);
                     else
                         megaHertz = (int)(usedRadio.VFOAFrequency / 1000.0);
 
-                    usedPower = (int)((255.0f * TxPower[0, megaHertz]) / 100.0f + 0.99f); // Weird ICOM mapping of percent to binary
+                    var usedPower = (int)((255.0f * TxPower[0, megaHertz]) / 100.0f + 0.99f);
 
                     if (usedPower > 255) usedPower = 255;
 
@@ -180,20 +172,17 @@ namespace DXLog.net
                     usedRadio.SendCustomCommand(IcomSetPower); // Set power
 
                     if (Debug)
-                        mainForm.SetMainStatusText(
-                            string.Format("IcomBandPower: Focus change: Phyiscal radio #1 Logical radio #{0} megaHertz {1} Power {2}% UsedPower {3} Command: [{4}]",
-                            cdata.FocusedRadio, megaHertz, TxPower[0, megaHertz], usedPower, BitConverter.ToString(IcomSetPower)));
+                        mainForm.SetMainStatusText($"IcomBandPower: Focus change: Physical radio #1 Logical radio #{cdata.FocusedRadio} megaHertz {megaHertz} Power {TxPower[0, megaHertz]}% UsedPower {usedPower} Command: [{BitConverter.ToString(IcomSetPower)}]");
                 }
                 else
                 {
                     if (Debug)
-                        mainForm.SetMainStatusText(
-                        string.Format("IcomBandPower: Focus change: Phyiscal radio #1 Logical radio #{0} No band change.",
-                        cdata.FocusedRadio));
+                        mainForm.SetMainStatusText($"IcomBandPower: Focus change: Physical radio #1 Logical radio #{cdata.FocusedRadio} No band change.");
 
                 }
             }
         }
+
     }
 }
 
