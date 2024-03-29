@@ -9,6 +9,7 @@
 // into force until the next focus switch. 
 // Only active for ICOM radio but does not verify radio is SO2V capable
 // By Björn Ekelund SM7IUN sm7iun@ssa.se 2019-09-19
+// Updated by James M1DST 2024-03-28
 
 //
 // NB. For educational purposes only. This functionality is now native to DXLog.

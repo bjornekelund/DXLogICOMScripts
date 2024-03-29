@@ -6,6 +6,7 @@
 // Please note that cross-band operation in SO2V with PA requires fast reacting band 
 // switching, CI-V based PA band switching may not be sufficiently fast.
 // By Björn Ekelund SM7IUN sm7iun@ssa.se 2019-01-29
+// Updated by James M1DST 2024-03-28
 
 using System;
 using IOComm;

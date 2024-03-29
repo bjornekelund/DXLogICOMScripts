@@ -1,5 +1,6 @@
 // ICOM Experiment script for exploration of DXLog's inner workings
 // By Björn Ekelund SM7IUN sm7iun@ssa.se 
+// Updated by James M1DST 2024-03-28
 
 using System.Windows.Forms;
 using IOComm;

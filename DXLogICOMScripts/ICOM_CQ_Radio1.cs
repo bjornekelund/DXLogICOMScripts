@@ -1,5 +1,6 @@
 // Focus radio 1 and send CQ 
 // By Björn Ekelund SM7IUN sm7iun@ssa.se 2020-04-15
+// Updated by James M1DST 2024-03-28
 
 //
 // NB. For educational purposes only. This functionality is now native to DXLog.

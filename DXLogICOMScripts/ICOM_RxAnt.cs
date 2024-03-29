@@ -1,5 +1,6 @@
 // ICOM 7851/7610 Receive antenna toggling.
 // By Björn Ekelund SM7IUN sm7iun@sm7iun.se 2022-07-08
+// Updated by James M1DST 2024-03-28
 
 using System;
 using IOComm;

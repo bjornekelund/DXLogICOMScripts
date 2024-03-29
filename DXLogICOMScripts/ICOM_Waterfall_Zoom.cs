@@ -5,6 +5,7 @@
 // Only active for ICOM radio but does not verify radio is Waterfall capable.
 // Waterfall capability is defined in readonly variable WaterfallCapable[].
 // By Björn Ekelund SM7IUN sm7iun@ssa.se 2019-01-30
+// Updated by James M1DST 2024-03-28
 
 // Mainly for educational purposes. Better use the DXLogIcomControl custom form. 
 
